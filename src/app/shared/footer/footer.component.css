@@ -1,0 +1,48 @@
+footer{
+    height: 20rem;
+    width: 100%;
+    background-color: #ff4646;
+    position: relative;
+}
+.list{
+    padding-top: 3rem;
+    display: flex;
+}
+.imgf{
+    height: 4rem;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    user-select: none;
+}
+h3{
+    color: #ffff;
+    font-family: 'League Spartan';
+    text-transform: capitalize;
+    font-size: 24px;
+}
+ul{
+    list-style: none;
+    margin-left: 10%;
+}
+li a{
+    font-family: 'garet';
+    color: #ffff;
+    font-size: 13px;
+    margin-top: 5px;
+
+}
+.redes{
+    margin-left: 20%;
+}
+.redes div{
+    margin-top: 10px;
+    width: 12rem;
+    display: flex;
+    justify-content: space-between;
+}
+.redes div a img{
+    width: 40px;
+    height: 40px;
+    
+}

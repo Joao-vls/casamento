@@ -1,0 +1,32 @@
+section {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.pai {
+    width: 100%;
+    z-index: 1;
+    background-color: #ff46465e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+.pai h1 {
+    font-family: 'League Spartan';
+    color: #fff;
+    background-color: #ff464600;
+    font-size: 9rem;
+    width: 30rem;
+    line-height: 7rem;
+    letter-spacing: -9px;
+    margin-left: 20px;
+}
+.pai p{
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 25px;
+
+}

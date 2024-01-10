@@ -1,0 +1,45 @@
+header {
+
+    padding: 15px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 10rem;
+    height: 3.5rem;
+    margin-top: -10px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.nav_principal {
+    width: 30rem;
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    color: #424242;
+}
+.nav_principal button{
+    font-size: 14.5px;
+}
+hr{
+    border: 1px solid #ff464616;
+}
+.planeje {
+    color: #ffffff;
+    background-color: #ff4646;
+    height: 3rem;
+    padding: 10px;
+    border: 0;
+    border-radius: 1.4rem;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffffff7e;
+    font-size: 14px;
+    font-weight: bold;
+}

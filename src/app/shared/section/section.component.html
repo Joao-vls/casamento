@@ -1,0 +1,15 @@
+<section>
+
+    <div class="img">
+        <img src={{img}} alt="" draggable="false">
+    </div>
+    <h1>
+        {{titulo}}
+    </h1>
+    <ul>
+        @for (item of items; track $index) {
+            <li>{{item}}</li>
+        }
+    </ul>
+    <button>{{buttonInput}}</button>
+</section>
