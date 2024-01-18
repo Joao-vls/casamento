@@ -1,12 +1,12 @@
 <header>
     <div class="logo">
-        <img src="../../../assets/img/logo/1.png" alt="" draggable="false">
+        <a routerLink="/"><img src="../../../assets/img/logo/1.png" alt="" draggable="false"></a>
     </div>
     <nav class="nav_principal">
-        <button>serviços</button>
-        <button>Quem somos</button>
-        <button>comunidade</button>
+        <button (click)="redirecionar('servicos')">serviços</button>
+        <button (click)="redirecionar('sobre')">Quem somos</button>
+        <button (click)="redirecionar('comunidade')">comunidade</button>
     </nav>
-    <button class="planeje">planeje aqui!</button>
+    <button class="planeje" (click)="redirecionar()">planeje aqui!</button>
 </header>
 <hr>
