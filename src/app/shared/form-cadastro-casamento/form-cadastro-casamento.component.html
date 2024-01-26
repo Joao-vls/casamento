@@ -1,0 +1,15 @@
+<form (submit)="submit()">
+  <div class="noivos_padrinhos">
+    @for (item of inputsNoivos; track $index) {
+    <input type="text" [(ngModel)]="inputsNoivos[$index]" [ngModelOptions]="{standalone: true}">
+    }
+    <button type="button" class="addInput" (click)="criarNovoInput()"></button>
+
+  </div>
+  <div class="noivos_padrinhos">
+    <input type="text">
+    <input type="text">
+    <button type="button" class="addInput"></button>
+  </div>
+  <button type="submit">Submit</button>
+</form>

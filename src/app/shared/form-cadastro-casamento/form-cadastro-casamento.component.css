@@ -1,0 +1,29 @@
+form{
+    width: 40rem;
+    margin-left: 30rem;
+}
+input{
+    border: 1px solid #ff4646;
+    width: 12rem;
+    height: 3rem;
+    margin-right: 50px;
+    border-radius: 10rem;
+    padding-left: 10px;
+}
+.addInput{
+    width: 40px;
+    height: 40px;
+    background-image: url('../../../assets/img/mais.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+.noivos_padrinhos{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+
