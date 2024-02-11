@@ -11,16 +11,26 @@ export class CadastroService {
 
   getDynamicForm(): FormGroup {
     return this.fb.group({
-      dynamicInputs: this.fb.array([]),
+      noivos: this.fb.array([]),
+      padrinhos:this.fb.array([])
     });
   }
 
-  getDynamicInputControl(): FormControl {
-    return this.fb.control('', Validators.required);
+  createDynamicInputNomes(): FormGroup {
+    return this.fb.group({
+      // Adicione os controles necessários aqui
+      nome: ['', [Validators.required]],
+    });
   }
 
-    // Adicione este método para obter a instância do controle diretamente
-    getDynamicInputFormControl(): AbstractControl {
-      return this.fb.control('', Validators.required);
-    }
+
+  addDynamicInput(nome:string,form: FormGroup) {
+    const dynamicInputs = form.get(nome) as FormArray;
+    dynamicInputs.push(this.createDynamicInputNomes());
+  }
+
+  removeDynamicInput(form: FormGroup, index: number) {
+    const dynamicInputs = form.get('noivos') as FormArray;
+    dynamicInputs.removeAt(index);
+  }
 }

@@ -1,15 +1,21 @@
-<form (submit)="submit()">
-  <div class="noivos_padrinhos">
-    @for (item of inputsNoivos; track $index) {
-    <input type="text" [(ngModel)]="inputsNoivos[$index]" [ngModelOptions]="{standalone: true}">
-    }
-    <button type="button" class="addInput" (click)="criarNovoInput()"></button>
+<form [formGroup]="casamento" (submit)="onSubmit()">
+  <div formArrayName="noivos" class="noivos_padrinhos">
+    <p>Nome</p>
+    <div *ngFor="let control of noivos.controls; let i = index">
+      <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
+      <button type="button" (click)="removeInput(i)">-</button>
+    </div>
+    <button type="button" (click)="addInput('noivos')" class="addInput"></button>
 
   </div>
-  <div class="noivos_padrinhos">
-    <input type="text">
-    <input type="text">
-    <button type="button" class="addInput"></button>
+  <div formArrayName="padrinhos" class="noivos_padrinhos">
+    <p>Nome</p>
+    <div *ngFor="let control of padrinhos.controls; let i = index">
+      <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
+      <button type="button" (click)="removeInput(i)">-</button>
+    </div>
+    <button type="button" (click)="addInput('padrinhos')" class="addInput"></button>
+
   </div>
-  <button type="submit">Submit</button>
+  <button type="submit">Enviar</button>
 </form>
