@@ -1,4 +1,4 @@
-drop database casamento;
+-- drop database casamento;
 create database casamento;
 use casamento;
 create table locais (
