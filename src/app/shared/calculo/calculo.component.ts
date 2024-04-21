@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, Input, input } from '@angular/core';
+import { PlanejamentoComponent } from '../../pages/planejamento/planejamento.component';
 @Component({
   selector: 'app-calculo',
   standalone: true,
@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './calculo.component.css'
 })
 export class CalculoComponent {
+  @Input()
+  name!:string[]
+
 
 }

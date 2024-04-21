@@ -1,21 +1,89 @@
 <form [formGroup]="casamento" (submit)="onSubmit()">
+  <div class="divloren">
+    <h2>Noivos</h2>
+  </div>
   <div formArrayName="noivos" class="noivos_padrinhos">
-    <p>Nome</p>
     <div *ngFor="let control of noivos.controls; let i = index">
-      <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
-      <button type="button" (click)="removeInput(i)">-</button>
+      <div class="inputs">
+
+        <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
+        <span class="erros">44</span>
+        <button type="button" *ngIf="casamento.value.noivos.length >2" (click)="removeInput(i,'noivos')"class="removeInput">x</button>
+      </div>
     </div>
     <button type="button" (click)="addInput('noivos')" class="addInput"></button>
 
   </div>
+  @if (activePadrinhos) {
+  <div class="divloren">
+    <h2>padrinhos</h2><button type="button" (click)="disablePadrinhos()">adicionar depois</button>
+  </div>
   <div formArrayName="padrinhos" class="noivos_padrinhos">
-    <p>Nome</p>
     <div *ngFor="let control of padrinhos.controls; let i = index">
-      <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
-      <button type="button" (click)="removeInput(i)">-</button>
+      <div class="inputs">
+        <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
+        <span class="erros">44</span>
+        <button type="button" *ngIf="casamento.value.padrinhos.length >2" (click)="removeInput(i,'padrinhos')"
+          class="removeInput">x</button>
+      </div>
     </div>
     <button type="button" (click)="addInput('padrinhos')" class="addInput"></button>
 
   </div>
-  <button type="submit">Enviar</button>
+  }
+  <div class="data_quantidade_local">
+    <div class="divisao_flex">
+      <h2>Data:</h2>
+      <h2>quantidade de convidados :</h2>
+    </div>
+    <div class="divisao_flex">
+      <div class="inputs">
+        <input type="date" [formControl]="data" [min]="minData" [max]="maxData" id="data">
+        <span class="erros">444</span>
+      </div>
+      <div class="inputs">
+        <input type="number" [formControl]="quantidadeConvidados" (blur)="NewLimit()">
+        <span class="erros">444</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="data_quantidade_local">
+    <div class="divisao_flex">
+      <h2>Local :</h2>
+    </div>
+    <div class="divisao_flex">
+      <p>cidade :</p>
+      <p *ngIf="localizacao">locais disponiveis :</p>
+    </div>
+    <div class="divisao_flex">
+      <div class="inputs">
+        <select [formControl]="cidade" (change)="selectOpitionCidade()">
+          <option *ngFor="let local of locais" [value]="local.municipio">{{ local.municipio }}</option>
+        </select>
+        <span class="erros"></span>
+      </div>
+      @if (localizacao) {
+      <div class="inputs">
+
+        <select [formControl]="local" (change)="selectOpitionLocal()"
+          style="padding-right: 60px; text-overflow: ellipsis;">
+          <option *ngFor="let local of localizacao" [value]="local.quantidadeMaxPessoas">{{ local.rua}} {{
+            local.bairro}}
+            {{ local.numero}} Quantidade de pessoas : {{local.quantidadeMaxPessoas}}</option>
+        </select>
+        <span class="erros"></span>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="buttons">
+    <button type="submit" id="removerservico">remover serviços</button>
+    <button type="submit" id="adicionarservico">adicionar serviços</button>
+  </div>
+  <div class="buttons">
+    <button type="submit" id="salvar">salvar para depois</button>
+    <button type="submit" (click)="addNewItem()" id="agendar">Proxima passo</button>
+  </div>
+
 </form>

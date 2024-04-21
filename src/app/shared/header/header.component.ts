@@ -18,7 +18,9 @@ export class HeaderComponent {
     if (url) {
       this.router.navigate(['/' + url]);
     } else {
-      this.router.navigate(['/' + this.url]);
+      if (this.url) {
+        this.router.navigate(['/' + this.url]);
+      }
     }
   }
 }

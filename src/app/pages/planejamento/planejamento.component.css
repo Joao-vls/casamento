@@ -1,0 +1,11 @@
+div {
+    display: flex;
+    margin-top: 5%;
+    width: 100%;
+    justify-content: space-around;
+    padding-bottom: 10px;
+}
+app-calculo{
+    width: 20%;
+    
+}

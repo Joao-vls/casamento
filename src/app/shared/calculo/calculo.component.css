@@ -1,0 +1,29 @@
+*{
+    color: #ffffff;
+}
+section {
+    background-color: #EF233C;
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+h1{
+    font-size: 45px;
+    align-self: center;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+ul{
+    margin-top: 20px;
+    list-style: none;
+}
+p{  
+    font-size: 30px;
+    align-self: center;
+    position: absolute;
+    bottom: 50px;
+}
