@@ -1,13 +1,29 @@
+<div class="div_close" (click)="closeServicos()"></div>
 <section>
-   <div class="selecao">
-        <button class="close">X</button>
-        <h1>serviços</h1>
-        <div (mouseover)="ativar()" (mouseout)="desativar()" class="servicos">
-            <h2>teste</h2>
-            @if (ativo[0]) {
-            <div class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima consequatur, dignissimos fugit consectetur nulla harum dolorem debitis. Quasi corporis cum a voluptatum? Atque, ad voluptatum iure iusto error earum aliquid.</div>
+    <div class="selecao">
+         <div class="fixo"> <button class="close" (click)="closeServicos()">X</button>
+            <h1>serviços</h1>
+    </div>
+    <div class="servico">
+    @for (item of servicos; track $index) {
+    <div class="servicos">
+        <h2>{{item.nome}}</h2>
+        <div class="buttons">
+        <button >adicionar</button>
+    <button (click)="ativar($index)" style="background-color: #FF4646;">
+            @if (!ativo[$index]) { mais informação}@else {
+                menos informação
             }
+        </button>
+    </div>
+    </div>
+    <hr>
+    @if (ativo[$index]) {
+        <div class="descricao">
+            {{item.descricao}} <br><span> Valor:{{item.valor}}R$</span>
         </div>
-
-   </div> 
+    }
+    }
+</div>
+    </div>
 </section>

@@ -6,9 +6,18 @@
     <div *ngFor="let control of noivos.controls; let i = index">
       <div class="inputs">
 
-        <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
-        <span class="erros">44</span>
-        <button type="button" *ngIf="casamento.value.noivos.length >2" (click)="removeInput(i,'noivos')"class="removeInput">x</button>
+        <input type="text" [formControl]="getFormControl(control, 'nome')" id="noivos{{ i }}">
+        <span class="erros"
+          *ngIf="this.getFormControl(this.noivos.controls[i],'nome').errors && this.getFormControl(this.noivos.controls[i],'nome').errors!['required']">
+          Campo obrigatorio
+        </span>
+        <span class="erros"
+          *ngIf="this.getFormControl(this.noivos.controls[i],'nome').errors && this.getFormControl(this.noivos.controls[i],'nome').errors!['pattern']">
+          Não e permitido numeros e caracteres especiais
+        </span>
+
+        <button type="button" *ngIf="casamento.value.noivos.length >2" (click)="removeInput(i,'noivos')"
+          class="removeInput">x</button>
       </div>
     </div>
     <button type="button" (click)="addInput('noivos')" class="addInput"></button>
@@ -21,8 +30,14 @@
   <div formArrayName="padrinhos" class="noivos_padrinhos">
     <div *ngFor="let control of padrinhos.controls; let i = index">
       <div class="inputs">
-        <input type="text" [formControl]="getFormControl(control, 'nome')" id="nome{{ i }}">
-        <span class="erros">44</span>
+        <input type="text" [formControl]="getFormControl(control, 'nome')" id="padrinhos{{ i }}">
+        <span class="erros"
+          *ngIf="this.getFormControl(this.padrinhos.controls[i],'nome').errors && this.getFormControl(this.padrinhos.controls[i],'nome').errors!['required']">Campo
+          obrigatorio</span>
+          <span class="erros"
+          *ngIf="this.getFormControl(this.padrinhos.controls[i],'nome').errors && this.getFormControl(this.padrinhos.controls[i],'nome').errors!['pattern']">
+          Não e permitido numeros e caracteres especiais
+        </span>
         <button type="button" *ngIf="casamento.value.padrinhos.length >2" (click)="removeInput(i,'padrinhos')"
           class="removeInput">x</button>
       </div>
@@ -39,11 +54,14 @@
     <div class="divisao_flex">
       <div class="inputs">
         <input type="date" [formControl]="data" [min]="minData" [max]="maxData" id="data">
-        <span class="erros">444</span>
+        <span class="erros" *ngIf="data.errors && data.errors['pastDate']">Data tem que se posterior a uma semana a
+          partir de hoje</span>
+
       </div>
       <div class="inputs">
-        <input type="number" [formControl]="quantidadeConvidados" (blur)="NewLimit()">
-        <span class="erros">444</span>
+        <input type="number" [formControl]="quantidadeConvidados" (keydown)="blockExponent($event)" (input)="sanitizeInput($event)">
+        <span class="erros" *ngIf="quantidadeConvidados.errors && quantidadeConvidados.errors['max']">Local não permite
+          essa quantidade de convidados</span>
       </div>
     </div>
 
@@ -59,27 +77,31 @@
     <div class="divisao_flex">
       <div class="inputs">
         <select [formControl]="cidade" (change)="selectOpitionCidade()">
-          <option *ngFor="let local of locais" [value]="local.municipio">{{ local.municipio }}</option>
+          @for (local of cidadesRepet; track $index) {
+
+          <option [value]="local">{{ local }}</option>
+
+          }
         </select>
-        <span class="erros"></span>
       </div>
       @if (localizacao) {
       <div class="inputs">
 
         <select [formControl]="local" (change)="selectOpitionLocal()"
           style="padding-right: 60px; text-overflow: ellipsis;">
-          <option *ngFor="let local of localizacao" [value]="local.quantidadeMaxPessoas">{{ local.rua}} {{
+          <option *ngFor="let local of localizacao" [id]="local.id" [value]="local.quantidadeMaxPessoas">{{ local.rua}}
+            {{
             local.bairro}}
             {{ local.numero}} Quantidade de pessoas : {{local.quantidadeMaxPessoas}}</option>
         </select>
-        <span class="erros"></span>
+
       </div>
       }
     </div>
   </div>
   <div class="buttons">
     <button type="submit" id="removerservico">remover serviços</button>
-    <button type="submit" id="adicionarservico">adicionar serviços</button>
+    <button type="submit" id="adicionarservico" (click)="activeServicos()">adicionar serviços</button>
   </div>
   <div class="buttons">
     <button type="submit" id="salvar">salvar para depois</button>

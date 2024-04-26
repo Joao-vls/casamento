@@ -1,7 +1,9 @@
 <app-header></app-header>
 
 <div>
-<app-form-cadastro-casamento (newItemEvent)="addItem($event)"></app-form-cadastro-casamento>
+<app-form-cadastro-casamento (newItemEvent)="addItem($event)" (newServico)="menuServico()"></app-form-cadastro-casamento>
 <app-calculo [name]="name"></app-calculo>
 </div>
-<!-- <app-servicos></app-servicos> -->
+@if (selecionarServico) {
+<app-servicos (close)="closeMenu()"></app-servicos>
+}

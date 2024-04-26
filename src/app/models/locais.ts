@@ -1,4 +1,5 @@
 export interface Locais {
+    id:number
     bairro: string
     complemento: string
     descricao: string

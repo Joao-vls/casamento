@@ -12,13 +12,29 @@ import { ServicosComponent } from "../../shared/servicos/servicos.component";
     imports: [HeaderComponent, FormCadastroCasamentoComponent, CalculoComponent, ServicosComponent]
 })
 export class PlanejamentoComponent {
-    name:string[]=[];
+
+
+    name: string[] = [];
+    selecionarServico!: boolean
     addItem(newItem: string) {
-        console.log(newItem,12);
+        console.log(newItem, 12);
 
         this.name.push(newItem);
         console.log(this.name);
-        
-      }
 
+    }
+
+    menuServico(){
+        this.selecionarServico=true;
+        document.body.style.overflow = 'hidden';
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // faz a rolagem suavemente
+          });
+
+    }
+    closeMenu(){
+        this.selecionarServico=false;
+        document.body.style.overflow = 'auto';
+    }
 }

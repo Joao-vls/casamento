@@ -1,24 +1,27 @@
 section{
     position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    background-color: #ff4646bb;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.selecao{
     width: 40rem;
     height: 50rem;
+    top: 5rem;
+    left: 30%;
+}
+.selecao{
     background-color: #ffff;
     border: 2px solid #EF233C;
+    max-height: 50rem;
     border-radius: 15px;
     position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+.servico{
+    margin-top: 40px;
+    width: 100%;
+    overflow: auto;
+    -ms-overflow-style: none; 
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #e72424d2 transparent
 }
 h1{
     margin-top: 10px;
@@ -44,25 +47,67 @@ h1{
 
 .servicos{
     margin-top: 15px;
-    width: 100%;
+    width: 99%;
+    position: relative;
+    
+    display: flex;
+    justify-content: space-between;
 }
 .servicos h2{
     padding: 10px;
-    border: 1px solid #EF233C;
     border-left:none ;
     border-right:none ;
-    border-radius: 10px;
+   border-top: none;
 
 }
-.servicos h2:hover{
-    border-bottom:none ;
-    
+.buttons{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    width: 10rem;
+}
+.buttons button{
+    background-color: #EF233C;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    color: #fff;
 }
 .descricao{
     padding: 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     border-bottom: 1px solid #EF233C;
-    
-
     border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #EF233C;
+    color: #fff;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.418);
 
+}
+.div_close{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: #ef233b7e;
+}
+
+.fixo{
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 16px;
+    border-radius: 30px;
+
+}
+hr{
+    border: 2px solid #EF233C;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.418);
+
+}
+span{
+    color: #ffffff;
 }
