@@ -3,9 +3,12 @@
 <p>{{name}}</p>
     } -->
    <h1>Valores</h1>
+   <div>
     <ul>
-        <li>valor : 200$</li>
-        
+    @for (item of name; track $index) {
+        <li><p>{{item.nome}} {{item.valor}}R$</p> <button (click)="removerValor($index)">x</button></li>
+    }
     </ul>
-    <p>total</p>
+</div>
+    <p class="total">Total : {{numero}}R$</p>
 </section>

@@ -1,9 +1,10 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CadastroService } from '../../services/cadastro.service';
 import { CommonModule } from '@angular/common';
 import { LocaisService } from '../../services/locais.service';
 import { Locais } from '../../models/locais';
+import { ServicosService } from '../../services/servicos.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class FormCadastroCasamentoComponent implements OnInit {
   cidadeSelecionada!: string;
   cidadesRepet:string[]=[];
   locais!: Locais[];
+  @Input()  valorTotal!:number;
   @Output() newItemEvent = new EventEmitter<string>();
   @Output() newServico = new EventEmitter<boolean>();
   get noivos() {
@@ -47,9 +49,9 @@ export class FormCadastroCasamentoComponent implements OnInit {
     return this.casamento.get('cidade') as FormControl;
   }
 
-
-  constructor(private formService: CadastroService, private locaisg: LocaisService) {
-    let currentDat = new Date();
+  
+  constructor(private formService: CadastroService, private locaisg: LocaisService,private dataService: ServicosService) {
+    const currentDat = new Date();
     currentDat.setDate(currentDat.getDate() + 7);
     this.minData = currentDat.toISOString().split('T')[0];
     const currentDate = new Date();
@@ -118,9 +120,10 @@ export class FormCadastroCasamentoComponent implements OnInit {
   onSubmit() {
     // Lógica para manipular o envio do formulário
     if (this.casamento.valid) {
-      console.log('Formulário válido, enviar dados...', this.casamento.value);
+      const informacoes={...this.casamento.value,valorTotal : this.valorTotal}
+      console.log('Formulário válido, enviar dados...', informacoes);
     } else {
-      console.log('Formulário inválido, corrija os erros.',);
+      console.log('Formulário inválido, corrija os erros.');
     }
   }
 
@@ -162,4 +165,5 @@ export class FormCadastroCasamentoComponent implements OnInit {
       input.value = value;
     }
 
+    
 }

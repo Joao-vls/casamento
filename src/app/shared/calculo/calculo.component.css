@@ -21,9 +21,31 @@ ul{
     margin-top: 20px;
     list-style: none;
 }
-p{  
+div{
+    top: 6.5rem;
+    width: 90%;
+    position: absolute;
+    max-height: 70%;
+    -ms-overflow-style: none; 
+    scrollbar-width: thin;
+    scrollbar-color: #fad4d4d2 transparent;
+    overflow-y: auto;
+}
+.total{  
     font-size: 30px;
     align-self: center;
     position: absolute;
     bottom: 50px;
+}
+li{
+    margin-bottom: 20px;
+    height: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+button{
+   background-color: #f88585; 
+   width: 20px;
+   text-align: center;
+   border-radius: 10px;
 }

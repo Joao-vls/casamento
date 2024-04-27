@@ -1,9 +1,9 @@
 <app-header></app-header>
 
 <div>
-<app-form-cadastro-casamento (newItemEvent)="addItem($event)" (newServico)="menuServico()"></app-form-cadastro-casamento>
-<app-calculo [name]="name"></app-calculo>
+<app-form-cadastro-casamento (newItemEvent)="addItem($event)" (newServico)="menuServico()" [valorTotal]="valorTo"></app-form-cadastro-casamento>
+<app-calculo  [ngClass]="{'preco_servico':selecionarServico}" [name]="name" (valorTotal)="addValor($event)"></app-calculo>
 </div>
 @if (selecionarServico) {
-<app-servicos (close)="closeMenu()"></app-servicos>
+<app-servicos (close)="closeMenu()" (servicosOut)="calcular($event)"></app-servicos>
 }

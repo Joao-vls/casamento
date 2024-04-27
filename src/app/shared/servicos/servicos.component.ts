@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Servicos } from '../../models/servicos';
 import { ServicosService } from '../../services/servicos.service';
 import { CommonModule } from '@angular/common';
@@ -12,18 +12,21 @@ import { CommonModule } from '@angular/common';
 export class ServicosComponent implements OnInit {
   ativo: boolean[] = [];
   servicos!: Servicos[];
-  @Output() close = new EventEmitter<boolean>()
-  constructor(private tiposServicos: ServicosService) { }
-a (){
-  console.log(5);
-  
-}
+  @Output() servicosOut= new EventEmitter<Servicos>();
+  @Output() close = new EventEmitter<boolean>(); 
 
-  ativar(i:number) {
+  constructor(private tiposServicos: ServicosService) { }
+
+
+  ativar(i:number,) {
     this.ativo[i] = (this.ativo[i]) ? false : true;
-    
   }
 
+  addServico(i:Servicos){
+    this.servicosOut.emit(i);
+    this.tiposServicos.emitirBotaoClicado();
+    
+  }
   closeServicos() {
     this.close.emit();
   }
@@ -33,6 +36,7 @@ a (){
   tiposOptions() {
     this.tiposServicos.getServicos().subscribe((response: Servicos[]) => {
       this.servicos = response;
+      
       //this.servicos.push(...response)
     });
   }

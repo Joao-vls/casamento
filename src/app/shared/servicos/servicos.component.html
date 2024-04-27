@@ -1,29 +1,32 @@
 <div class="div_close" (click)="closeServicos()"></div>
 <section>
     <div class="selecao">
-         <div class="fixo"> <button class="close" (click)="closeServicos()">X</button>
+        <div class="fixo"> <button class="close" (click)="closeServicos()">X</button>
             <h1>serviços</h1>
-    </div>
-    <div class="servico">
-    @for (item of servicos; track $index) {
-    <div class="servicos">
-        <h2>{{item.nome}}</h2>
-        <div class="buttons">
-        <button >adicionar</button>
-    <button (click)="ativar($index)" style="background-color: #FF4646;">
-            @if (!ativo[$index]) { mais informação}@else {
-                menos informação
-            }
-        </button>
-    </div>
-    </div>
-    <hr>
-    @if (ativo[$index]) {
-        <div class="descricao">
-            {{item.descricao}} <br><span> Valor:{{item.valor}}R$</span>
+            <hr>
         </div>
-    }
-    }
-</div>
+        <div class="servico">
+            @for (item of servicos; track $index) {
+            <div class="servicos">
+                <h2>{{item.nome}}</h2>
+                <div class="buttons">
+                    <button (click)="addServico(item)">adicionar</button>
+                    <button (click)="ativar($index)" style="background-color: #FF4646;">
+                        @if (!ativo[$index]) { mais informação}@else {
+                        menos informação
+                        }
+                    </button>
+                </div>
+            </div>
+            <hr>
+            @if (ativo[$index]) {
+            <div class="descricao">
+                {{item.descricao}} <br><span> Valor:{{item.valor}}R$</span>
+            </div>
+            }
+            }
+
+        </div>
+
     </div>
 </section>

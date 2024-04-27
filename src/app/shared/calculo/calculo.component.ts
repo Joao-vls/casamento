@@ -1,5 +1,7 @@
-import { Component, Input, input } from '@angular/core';
-import { PlanejamentoComponent } from '../../pages/planejamento/planejamento.component';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
+import { Servicos } from '../../models/servicos';
+import { ServicosService } from '../../services/servicos.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-calculo',
   standalone: true,
@@ -9,7 +11,30 @@ import { PlanejamentoComponent } from '../../pages/planejamento/planejamento.com
 })
 export class CalculoComponent {
   @Input()
-  name!:string[]
+  name!: Servicos[]
+  @Output() valorTotal = new EventEmitter <number>();
+  numero: number = 0;
+  private eventoSubscription: Subscription;
 
+  constructor(private eventService: ServicosService){
+    this.eventoSubscription = this.eventService.botaoClicado$.subscribe(() => {
+      this.somaValores();
+    });
+  }
+
+
+  somaValores() {
+    this.numero=0
+    for (let index = 0; index < this.name.length; index++) {
+      this.numero += this.name[index].valor;
+    }
+    this.valorTotal.emit(this.numero);
+  }
+
+  removerValor(i:number) {
+    
+    this.name.splice(i,1);
+    this.eventService.emitirBotaoClicado();
+  }
 
 }

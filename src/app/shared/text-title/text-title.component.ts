@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class TextTitleComponent {
   @Input()
-  texto:String='';
+  texto:string='';
   @Input()
-  titulo:String='';
+  titulo:string='';
 }

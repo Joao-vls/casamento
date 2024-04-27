@@ -9,3 +9,8 @@ app-calculo{
     width: 20%;
     
 }
+
+.preco_servico{
+    height: 40rem;
+    z-index: 1;
+}

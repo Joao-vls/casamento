@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormArray, AbstractControl } from '@angular/forms';
+import { FormBuilder,FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
 
 
 @Injectable({
@@ -38,7 +37,7 @@ export class CadastroService {
 
   async dateValidatorMin(control: AbstractControl) {
     const selectedDate = new Date(control.value);
-    let currentDate = new Date();
+    const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 6);
 
     return selectedDate > currentDate ? null : { pastDate: true };
