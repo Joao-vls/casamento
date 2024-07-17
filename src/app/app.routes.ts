@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { PlanejamentoComponent } from './pages/planejamento/planejamento.component';
-import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { CadastroComponent } from './shared/form-cadastro-usuario/cadastro.component';
+
 
 export const routes: Routes = [
     {'path':'',component:HomeComponent},

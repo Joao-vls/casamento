@@ -1,0 +1,164 @@
+form {
+    width: 47rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+input,
+select {
+    border: 2px solid #ff4646;
+    width: 16rem;
+    height: 3.2rem;
+    max-height: 3.2rem;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 35px;
+    font-size: 15px;
+    background-color: #ffffff;
+}
+
+.addInput {
+    width: 40px;
+    margin-top: -5%;
+    height: 40px;
+    background-image: url('../../../assets/img/mais.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.removeInput {
+    color: #ffffff;
+    position: absolute;
+    margin-left: 90%;
+    top: 18%;
+    border: 1px solid #ff0000;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #ff0000;
+}
+
+.noivos_padrinhos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.divloren {
+    display: flex;
+    margin-left: 3px;
+    margin-bottom: -20px;
+    align-items: center;
+    font-weight: bold;
+    width: 100%;
+}
+
+.divloren button {
+    background-color: #EF233C;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffffff7e;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 20px;
+    color: #ffffff;
+    margin-left: 5px;
+    border-radius: 10px;
+}
+
+.data_quantidade_local {
+    display: flex;
+    flex-direction: column;
+}
+
+.divisao_flex {
+    display: flex;
+}
+
+.divisao_flex * {
+    flex: 1;
+}
+
+.divisao_flex input {
+    width: 11rem;
+    height: 2rem;
+}
+
+#agendar {
+    color: #ffffff;
+    background-color: #EF233C;
+    background-image: url(../../../assets/img/imgenviar.png);
+    background-size: 75px;
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
+
+}
+
+#salvar {
+    background-image: url(../../../assets/img/imsave.png);
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
+}
+#removerservico{
+    background-image: url(../../../assets/img/sub.png);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position-x: 98%;
+    background-position-y: 60%;
+}
+#adicionarservico{
+    background-image: url(../../../assets/img/adic.png);
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-color: #EF233C;
+    background-position-x: 98%;
+    background-position-y: 55%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    
+}
+.buttons button{
+    width: 15.9rem;
+    color: #ffffff;
+    background-color: #FF4646;
+    height: 3rem;
+    padding: 10px;
+    border-radius: 1.4rem;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffffff7e;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 8px;
+    padding-right: 30px;
+    padding-left: 2px;
+    
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    background: url('../../../assets/img/select.png') no-repeat 95% center;
+    background-size: 38px;
+    background-color: #ffffff;
+}
+.inputs{
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    height: 6rem;
+    position: relative;
+
+}
+.erros{
+    font-size: 15px;
+    width: 16rem;
+}

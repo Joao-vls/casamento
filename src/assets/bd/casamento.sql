@@ -1,89 +1,6 @@
--- drop database casamento;
 create database casamento;
 use casamento;
-create table locais (
-	id int auto_increment primary key,
-    municipio varchar(50) not null,
-    uf char(2) not null,
-    valor float unsigned not null,
-    quantidadeMaxPessoas smallint unsigned not null,
-    rua varchar(50) not null,
-    bairro varchar(50) not null,
-    numero varchar(10) not null,
-    complemento varchar(40)
-);
-create table usuario(
-	id int auto_increment primary key,
-	email varchar (200) not null,
-    senha varchar (350) not null,
-    telefone varchar (300) not null
-);
-create table contratante(
-	id int auto_increment primary key,
-    nome varchar(150) not null,
-    datacontrato datetime not null,
-	fk_usuario int not null,
-    foreign key (fk_usuario) references usuario(id)
-);
-create table casamento(
-	id int auto_increment primary key,
-	dia datetime not null,
-    valorDoLocalDiaCompra float unsigned not null,
-    fk_local int not null,
-    fk_contratante int not null,
-    UNIQUE KEY dia_local (dia,fk_local),
-    foreign key (fk_local) references locais(id),
-    foreign key (fk_contratante) references contratante(id)
-);
-
-
-create table pagamento(
-	valorDoPagamento float unsigned not null,
-    tipo enum('pix','credito','debito','boleto'),
-    desconto tinyint unsigned not null,
-    id int auto_increment primary key,
-    fk_contratante int not null,
-    dataPagamento datetime not null,
-    foreign key (fk_contratante) references contratante(id)
-);
-create table noivos(
-	id int auto_increment primary key,
-    nome varchar(150) not null,
-    idadeDiaCasamento tinyint unsigned,
-    fk_contratante int not null,
-    foreign key (fk_contratante) references contratante(id)
-);
-create table usuarioNoivos(
-	fk_noivo int not null,
-	fk_usuario int not null,
-    foreign key (fk_usuario) references usuario(id),
-    foreign key (fk_noivo) references noivos(id)
-);
-
-create table padrinhosMadrinhas(
-	id int auto_increment primary key,
-    nome varchar(150) not null,
-    fk_casamento int,
-    foreign key (fk_casamento) references casamento(id)
-);
-create table tipo(
-	id int auto_increment primary key,
-    nome varchar(50),
-	descricao varchar(150),
-    valor float not null
-);
-create table servicos(
-	fk_tipoServico int,
-	fk_casamento int,
-    valor float unsigned,
-    unique key(fk_tipoServico,fk_casamento),
-    foreign key (fk_casamento) references casamento(id),
-    foreign key (fk_tipoServico) references tipo(id)
-);
-
-
-
-INSERT INTO locais (municipio, uf, valor, quantidadeMaxPessoas, rua, bairro, numero, complemento) 
+INSERT INTO locais (municipio, uf, valor, quantidade_max_pessoas, rua, bairro, numero, complemento) 
 VALUES 
 ('São Paulo', 'SP', 5000.00, 200, 'Avenida Paulista', 'Centro', '123', 'Apartamento 101'),
 ('Rio de Janeiro', 'RJ', 7000.00, 150, 'Rua Copacabana', 'Copacabana', '456', ''),
@@ -97,35 +14,39 @@ VALUES
 ('Porto Alegre', 'RS', 4300.00, 110, 'Avenida Borges de Medeiros', 'Centro Histórico', '2223', '');
 
 
-INSERT INTO usuario (email, senha, telefone) 
+INSERT INTO usuario (email, senha, telefone,nome) 
 VALUES 
-('joao@example.com', 'senha', '123456789'),
-('marcos@example.com', 'senha', '985471354'),
-('marcas@example.com', 'senha', '9854781354'),
-('pedro@example.com', 'senha', '978451355'),
-('yara@example.com', 'senha', '978451343'),
-('flaves@example.com', 'senha', '978548711'),
-('juliana@example.com', 'senha', '998574153'),
-('contratanteexterno@example.com', 'senha', '998574153'),
-('marcia@example.com', 'senha', '997121179'),
-('carolina@example.com', 'senha', '995214779'),
-('luisa@example.com', 'senha', '999985512'),
-('fernandosil@example.com', 'senha', '998745123');
+('joao@example.com', 'senha', '123456789','joao'),
+('marcos@example.com', 'senha', '985471354','marcos'),
+('marcas@example.com', 'senha', '9854781354','marcas'),
+('pedro@example.com', 'senha', '978451355','pedro'),
+('yara@example.com', 'senha', '978451343','yara'),
+('flaves@example.com', 'senha', '978548711','flave'),
+('juliana@example.com', 'senha', '998574153','juliana'),
+('contratanteexterno@example.com', 'senha', '998574153','flavio'),
+('marcia@example.com', 'senha', '997121179','marcia'),
+('carolina@example.com', 'senha', '995214779','carolina'),
+('luisa@example.com', 'senha', '999985512','luisa'),
+('fernandosil@example.com', 'senha', '998745123','fernando');
 
-INSERT INTO contratante (nome, datacontrato, fk_usuario)
+select *  from contratante;
+
+INSERT INTO contratante ( data_contrato, fk_usuario)
 VALUES 
-('João Silva', '2023-01-15 10:00:00', 1),
-('Marcos', '2023-05-10 16:32:00', 2),
-('Pedro', '2023-03-10 16:32:00', 4),
-('Washitoon ', '2023-03-10 16:32:00', 8),
-('Flavia ', '2023-03-04 14:12:00', 5),
-('Juliana ', '2023-01-20 14:12:00', 7),
-('Marcia ', '2023-08-20 14:12:00', 9),
-('Carolina','2023-09-20 11:12:00',10 ),
-('Luisa','2023-07-20 08:52:00',11 ),
-('Fernando Silva','2023-03-19 13:11:00',12 );
+( '2023-01-15 10:00:00', 1),
+('2023-05-10 16:32:00', 2),
+('2023-05-10 16:32:00', 3),
+('2023-03-10 16:32:00', 4),
+( '2023-03-10 16:32:00', 8),
+('2023-05-10 16:32:00', 6),
+('2023-03-04 14:12:00', 5),
+('2023-01-20 14:12:00', 7),
+('2023-08-20 14:12:00', 9),
+('2023-09-20 11:12:00',10 ),
+('2023-07-20 08:52:00',11 ),
+('2023-03-19 13:11:00',12 );
 
-INSERT INTO noivos (nome,idadeDiaCasamento, fk_contratante) 
+INSERT INTO noivos (nome,idade_dia_casamento, fk_contratante) 
 VALUES 
 ('João da Silva',30, 1), -- 1
 ('Maria Oliveira',31,1), -- 2
@@ -150,7 +71,7 @@ VALUES
 ('Hugu',50,4), -- 21
 ('Yara',48,4); -- 22
 
-INSERT INTO usuarioNoivos (fk_noivo, fk_usuario) 
+INSERT INTO usuario_noivos (fk_noivo, fk_usuario) 
 VALUES 
 (1, 1),
 (14, 2),
@@ -164,7 +85,7 @@ VALUES
 (11,11),
 (13,12);
 
-INSERT INTO casamento (dia, valorDoLocalDiaCompra, fk_local, fk_contratante) 
+INSERT INTO casamento (dia, valor_do_local_dia_compra, fk_local, fk_contratante) 
 VALUES 
 ('2023-06-15 18:00:00', 3000.00, 1, 1),
 ('2023-07-20 16:30:00', 5000.00, 2, 2),
@@ -178,24 +99,26 @@ VALUES
 ('2024-02-20 14:30:00', 5200.00, 9, 10);
 
 
-INSERT INTO pagamento (valorDoPagamento, dataPagamento, tipo, desconto, fk_contratante) 
+INSERT INTO pagamento (valor_do_pagamento, data_pagamento, tipo, desconto, fk_contratante,fk_casamento) 
 VALUES 
-(3000.00, '2023-01-15 08:30:00', 'pix', 0, 1),
-(5000.00, '2023-02-20 10:15:00', 'credito', 10, 2),
-(2500.00, '2023-03-25 13:45:00', 'debito', 5, 3),
-(2000.00, '2023-04-10 16:20:00', 'boleto', 15, 4),
-(1800.00, '2023-05-05 09:00:00', 'pix', 0, 5),
-(3500.00, '2023-06-10 11:30:00', 'credito', 10, 6),
-(1000.00, '2023-07-15 14:00:00', 'debito', 5, 7),
-(1200.00, '2023-08-20 17:10:00', 'boleto', 15, 8),
-(800.00, '2023-09-25 08:45:00', 'pix', 0, 9),
-(200.00, '2023-08-25 08:45:00', 'pix', 0, 9),
-(1500.00, '2023-10-30 10:00:00', 'credito', 10, 10);
+(3000.00, '2023-01-15 08:30:00', 'pix', 0, 1, 1),
+(5000.00, '2023-02-20 10:15:00', 'credito', 10, 2, 2),
+(2500.00, '2023-03-25 13:45:00', 'debito', 5, 3, 3),
+(2000.00, '2023-04-10 16:20:00', 'boleto', 15, 4, 4),
+(1800.00, '2023-05-05 09:00:00', 'pix', 0, 5, 5),
+(3500.00, '2023-06-10 11:30:00', 'credito', 10, 6, 6),
+(1000.00, '2023-07-15 14:00:00', 'debito', 5, 7, 7),
+(1200.00, '2023-08-20 17:10:00', 'boleto', 15, 8, 8),
+(800.00, '2023-09-25 08:45:00', 'pix', 0, 9, 9),
+(200.00, '2023-08-25 08:45:00', 'pix', 0, 9, 9),
+(1500.00, '2023-10-30 10:00:00', 'credito', 10, 10, 10),
+(1500.00, '2023-10-30 10:00:00', 'credito', 10, 11, 11),
+(1500.00, '2023-10-30 10:00:00', 'credito', 10, 12, 12);
 
 
 
 -- Inserções na tabela 'padrinhosMadrinhas'
-INSERT INTO padrinhosMadrinhas (nome, fk_casamento) 
+INSERT INTO padrinhos_madrinhas (nome, fk_casamento) 
 VALUES 
 ('Carlos Oliveira', 1),
 ('Patrícia Santos', 1),
@@ -217,7 +140,7 @@ VALUES
 
 
 -- Inserções na tabela 'tipo'
-INSERT INTO tipo (nome, descricao, valor) 
+INSERT INTO tipo_servico (nome, descricao, valor) 
 VALUES 
 ('Decoração', 'Serviço de decoração para o casamento', 3000.00),
 ('Buffet <150', 'Serviço de buffet para o casamento', 5000.00),
@@ -231,7 +154,7 @@ VALUES
 ('Maquiagem e cabelo', 'Serviço de maquiagem e cabelo para o casamento', 1200.00);
 
 -- Inserções na tabela 'servicos'
-INSERT INTO servicos (fk_tipoServico, fk_casamento, valor) 
+INSERT INTO servicos (fk_tipo_Servico, fk_casamento, valor) 
 VALUES 
 (1, 1, 3000.00),
 (4, 2, 5000.00),
@@ -355,12 +278,3 @@ SELECT c.nome AS contratante, SUM(p.valorDoPagamento) AS total_pago
 FROM contratante c
 LEFT JOIN pagamento p ON c.id = p.fk_contratante
 GROUP BY c.nome;
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,169 @@
+section{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #ff464679;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+}
+form {
+    width: 25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ebebeb;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+
+}
+
+input,
+select {
+    border: 0px;
+    border-bottom: 2px  solid #ff4646;
+    width: 20rem;
+    height: 2.2rem;
+    max-height: 3.2rem;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 40px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    background-color: #ffffff;
+}
+form label:nth-of-type(1) {
+    margin-top: 55px;
+}
+label{
+    font-size:large;
+    text-align: center;
+    
+    width: 16rem;
+    margin-bottom: 3px;
+}
+.ocultar{
+    background-image: url(../../../assets/img/olhoaberto.png);
+    background-color: #ebebeb00;
+    background-size: 100% 100%;
+    width: 20px;
+    height: 20px;
+    align-self: end;
+    margin-right: 25px;
+    margin-top: -70px;
+}
+.mostrar{
+    background-image: url(../../../assets/img/olhofechado.png);
+    background-color: #ebebeb00;
+    background-size: 100% 100%;
+    width: 20px;
+    height: 20px;
+    align-self: end;
+    margin-right: 25px;
+    margin-top: -70px;
+}
+.salvar{
+    width: 15rem;
+    align-self: center;
+    color: #ffffff;
+    background-color: #FF4646;
+    height: 3rem;
+    border-radius: 1.4rem;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffffff7e;
+    margin-top: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    
+}
+.fixo{
+    position: absolute;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 30px;
+    width: 100%;
+    top: 0;
+
+}
+
+.heart {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    background-color: red;
+    transform: rotate(-45deg);
+    margin-top: 10px;
+    margin-bottom: 2px;
+   
+}
+.div_close{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -7px;
+    left: 0;
+}
+
+.heart::after {
+    left: 7px;
+    top: 0;
+}
+.heart p{
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    font-size: 15px;
+    transform: rotate(45deg);
+    margin-top: -5px;
+    margin-left: 2.50px;
+    color: #ffffff;
+   
+}
+h1{
+    display: flex;
+}
+h1 p:nth-child(1){
+    transform: translateX(2px) translateY(5px) rotate(-21deg);
+}
+h1 p:nth-child(2){
+    transform: translateX(-1px) translateY(-1px) rotate(-9deg);
+}
+ h1 p:nth-child(3){
+    transform: translateX(-1px) translateY(-5px) rotate(-4deg);
+ }
+ h1 p:nth-child(4){
+    transform: translateX(-1px) translateY(-6px) rotate(2deg);
+ }
+ h1 p:nth-child(5){
+    transform: translateX(-2px) translateY(-5px) rotate(9deg);
+ }
+ h1 p:nth-child(6){
+    transform: translateX(-4px) translateY(-2px) rotate(16deg);
+ }
+ h1 p:nth-child(7){
+    transform: translateX(-6px) translateY(3px) rotate(10deg);
+ }
+
+ a{
+    margin-top: 10px;
+    color: #FF4646;
+    text-decoration: underline;
+ }

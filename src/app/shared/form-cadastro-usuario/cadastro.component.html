@@ -1,0 +1,21 @@
+<section >
+    <div class="div_close" (click)="closeCadastro()"></div>
+<form action="post">
+    <div class="fixo"> <button type="button" class="close" (click)="closeCadastro()">
+<div class="heart"><p>X</p></div>
+
+    </button >
+        <h1><p>A</p><p>c</p><p>e</p><p>s</p><p>s</p><p>a</p><p>r</p></h1>
+        <hr>
+    </div>
+     <label for="nome">Nome:</label>
+    <input id="nome" type="text" placeholder="Digite seu nome...">   
+    <label for="email">Email:</label>
+    <input id="email" type="email" placeholder="Digite seu email...">
+    <label for="password">Senha:</label>
+    <input [type]="!isActive ? 'text' : 'password'" id="password"  placeholder="Digite sua senha">
+    <button [ngClass]="{'mostrar':isActive,'ocultar':!isActive}" type="button" (click)="buttonActive()"></button>
+    <button class="salvar">Login / Cadastro</button>
+    <a href="#">recuperar conta!</a>
+</form>
+</section>
