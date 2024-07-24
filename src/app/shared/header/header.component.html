@@ -2,11 +2,15 @@
     <div class="logo">
         <a routerLink="/"><img src="../../../assets/img/logo/1.png" alt="" draggable="false"></a>
     </div>
+    @if (!sessionCookie()) {
     <nav class="nav_principal">
         <button (click)="redirecionar('servicos')">serviços</button>
         <button (click)="redirecionar('sobre')">Quem somos</button>
         <button (click)="redirecionar('comunidade')">comunidade</button>
     </nav>
     <button class="planeje" (click)="redirecionar()">planeje aqui!</button>
+}@else if (paginaAtual=="/noivos") {
+
+}
 </header>
 <hr>

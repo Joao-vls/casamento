@@ -14,7 +14,7 @@ form {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #ebebeb;
+    background-color: #f1f1f1;
     padding: 20px;
     border-radius: 20px;
     position: relative;
@@ -81,7 +81,7 @@ label{
 }
 .fixo{
     position: absolute;
-    background-color: #ffffff;
+    background-color: #ffffff50;
     display: flex;
     align-items: center;
     flex-direction: column;

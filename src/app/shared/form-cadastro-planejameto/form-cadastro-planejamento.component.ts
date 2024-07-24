@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CadastroService } from '../../services/cadastro.service';
+import { CadastroService } from '../../services/planejamento.service';
 import { CommonModule } from '@angular/common';
 import { LocaisService } from '../../services/locais.service';
 import { Locais } from '../../models/locais';
@@ -136,7 +136,8 @@ export class FormCadastroCasamentoComponent implements OnInit {
     if (this.casamento.valid) {
       const informacoes={...this.casamento.value,valorTotal : this.valorTotal};
       console.log('Formulário válido, enviar dados...', informacoes);
-      this.redirectCadastro();
+     // this.redirectCadastro();
+      this.activeCadastro();
     } else {
       console.log('Formulário inválido, corrija os erros.');
     }
@@ -191,7 +192,7 @@ export class FormCadastroCasamentoComponent implements OnInit {
   }
 
   // Redireciona para a página de cadastro
-  redirectCadastro(){
-    this.router.navigate(['/cadastro']);
-  }  
+  // redirectCadastro(){
+  //   this.router.navigate(['/cadastro']);
+  // }  
 }

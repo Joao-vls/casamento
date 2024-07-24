@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { CookiesServices } from '../../services/cookies.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -9,10 +10,17 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
 
-  @Input()
-  url: string = '';
+  @Input()url: string = '';
+  paginaAtual!:string;
+  
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private cookie:CookiesServices,private route: ActivatedRoute) { 
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.updateCurrentPage();
+      }
+    });
+  }
 
   redirecionar(url: string | void) {
     if (url) {
@@ -22,5 +30,16 @@ export class HeaderComponent {
         this.router.navigate(['/' + this.url]);
       }
     }
+  }
+  sessionCookie(){
+      if(this.cookie.getCookie()){
+        console.log (Object.keys(this.cookie.getCookie()));
+        
+        return true;
+      }
+      return false;
+  }
+  private updateCurrentPage() {
+    this.paginaAtual = this.router.url;
   }
 }
