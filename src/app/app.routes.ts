@@ -9,7 +9,7 @@ import { NoivosComponent } from './pages/noivos/noivos.component';
 export const routes: Routes = [
     {'path':'',component:HomeComponent},
     {'path':'planejamento',component:PlanejamentoComponent},
-    {'path':'cadastro',component:CadastroComponent},
+    {'path':'acesso',component:CadastroComponent},
     {'path':'contratante',component:ContratanteComponent},
     {'path':'noivos',component:NoivosComponent},
     {'path':'**',component:HomeComponent}

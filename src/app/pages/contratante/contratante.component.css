@@ -1,0 +1,56 @@
+main{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    
+}
+section{ 
+
+    margin-top: 2rem;
+    margin-left: 35rem;
+    display: flex;
+    flex-direction: column;
+}
+section ul{
+    list-style: none;
+}
+section .valores li{
+    font-family: 'Courier New','Kiona';
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 30px;
+}
+.noivos{
+    width: 100%;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.noivos h3{
+    align-self: center;
+    font-family: 'Courier New','Kiona';
+    margin-bottom: -12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:#f1f1f1;
+    z-index: 1;
+}
+.nomes{
+    border: 1px solid #ff3131;
+    min-height: 40px;
+    align-self: center;
+    min-width:50rem;
+    max-width: 65rem;
+    border-radius: 10px;
+    display:flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+.nomes li{
+    padding: 15px;
+    white-space: nowrap;
+   
+}
+
