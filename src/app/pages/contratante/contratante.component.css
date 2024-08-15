@@ -1,18 +1,17 @@
 main{
     position: absolute;
-    height: 100%;
-    width: 100%;
-    
+    min-height: 100%;
+    width: 100%;   
 }
 section{ 
-
     margin-top: 2rem;
     margin-left: 35rem;
     display: flex;
     flex-direction: column;
+    margin-bottom: 20%; 
 }
 section ul{
-    list-style: none;
+    list-style: none;align-items: center;
 }
 section .valores li{
     font-family: 'Courier New','Kiona';
@@ -53,4 +52,26 @@ section .valores li{
     white-space: nowrap;
    
 }
-
+.fotos{
+    margin-top: 3rem;
+    margin-left: 10%;
+    width: 80%;
+    display: block;  
+}
+.confirmar{
+    margin-top: 10rem;
+    align-self: center;
+    width: 15.9rem;
+    color: #ffffff;
+    background-color: #ff3131;
+    height: 3rem;
+    padding: 10px;
+    border-radius: 1.4rem;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffffff7e;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 8px;
+    padding-right: 30px;
+    padding-left: 2px;
+    
+}

@@ -1,45 +1,28 @@
 import { Injectable } from '@angular/core';
+import { CookiesService } from './cookies.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private tokenKey: string;
+  private readonly tokenKey: string;
 
-  constructor() {
-    this.tokenKey = this.generateOrRetrieveTokenKey();
+  constructor(private cookieService: CookiesService) {
+    this.tokenKey = 'authTokenKey';  // Nome da chave para armazenar o token
   }
 
-  private generateOrRetrieveTokenKey(): string {
-    const storedKey = localStorage.getItem('authTokenKey');
-    if (storedKey) {
-      return storedKey;
-    } else {
-      const newKey = this.generateRandomKey(32); // 32 caracteres para uma chave forte
-      localStorage.setItem('authTokenKey', newKey);
-      return newKey;
-    }
-  }
-
+  // Define o token no cookie com uma duração de 2 horas
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    this.cookieService.setCookie(this.tokenKey, token, 2);
   }
 
+  // Obtém o token armazenado no cookie
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return this.cookieService.getCookie(this.tokenKey);
   }
 
+  // Remove o token do cookie
   clearToken(): void {
-    localStorage.removeItem(this.tokenKey);
-  }
-  generateRandomKey(length: number): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+    this.cookieService.deleteCookie(this.tokenKey);
   }
 }
-

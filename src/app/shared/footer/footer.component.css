@@ -2,7 +2,8 @@ footer{
     height: 20rem;
     width: 100%;
     background-color: #ff4646;
-    position: relative;
+    position: absolute;
+    bottom: 0;
 }
 .list{
     padding-top: 3rem;

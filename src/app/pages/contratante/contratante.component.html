@@ -12,9 +12,28 @@
         <ul class="nomes">
            
         </ul>
-        <div>
-            
-        </div>
+
     </div>
+    <div class="fotos">
+        <app-carrosel></app-carrosel>
+    </div>
+    @if (casamento) {
+        <div class="noivos">
+            <h3>DADOS DO CASAMENTO</h3>
+            <ul class="nomes">
+               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+            </ul>
+    
+        </div>
+    }@else {
+        <button class="confirmar"></button>
+    }
 </section>
+<app-footer></app-footer>
 </main>

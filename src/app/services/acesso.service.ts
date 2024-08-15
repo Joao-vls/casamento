@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class AcessoService {
 
   constructor(private http: HttpClient) { }
 
-  createUser(user: { nome: string, email: string, senha: string }): Observable<Object> {
+  createUser(user: { nome: string, email: string, senha: string }): Observable<Usuario> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<string>(this.apiUrl, user, { headers });
+    return this.http.post<Usuario>(this.apiUrl, user, { headers });
   }
 }
