@@ -32,7 +32,7 @@ export class CarroselComponent implements AfterViewInit {
     new Swiper('.swiper', {
       modules: [Navigation, Pagination, Scrollbar],
       slidesPerView: 3,
-      spaceBetween: 5,
+      spaceBetween: 3,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',

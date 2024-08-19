@@ -6,6 +6,7 @@ import { LocaisService } from '../../services/locais.service';
 import { Locais } from '../../models/locais';
 import { Router } from '@angular/router';
 import { CasamentoService } from '../../services/casamento.service';
+import { CasamentoDetalhes } from '../../models/casamento-detalhes';
 
 @Component({
   selector: 'app-form-cadastro-casamento',
@@ -128,16 +129,25 @@ export class FormCadastroCasamentoComponent implements OnInit {
 
   // Manipula o envio do formulário
   onSubmit() {
-     this.casamentoService.getDias(this.casamento.value.data).subscribe((response: JSON) => {
-      this.diasDisponiveis = response;
-      console.log(this.diasDisponiveis);
-    });
+    //  this.casamentoService.getDias(this.casamento.value.data).subscribe((response: JSON) => {
+    //   this.diasDisponiveis = response;
+    //   console.log(this.diasDisponiveis);
+    // });
 
     if (this.casamento.valid) {
-      const informacoes={...this.casamento.value,valorTotal : this.valorTotal};
+      
+      const informacoes:CasamentoDetalhes={
+        noivos:this.casamento.value.noivos,
+        padrinhos: this.casamento.value.padrinhos,
+        data: this.casamento.value.data, 
+        local: this.casamento.value.local,
+        cidade: this.casamento.value.cidade,
+        quantidadeConvidados: this.casamento.value.quantidadeConvidados
+      };
       console.log('Formulário válido, enviar dados...', informacoes);
      // this.redirectCadastro();
-      this.activeCadastro();
+
+      //this.activeCadastro();
     } else {
       console.log('Formulário inválido, corrija os erros.');
     }

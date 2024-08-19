@@ -2,15 +2,18 @@
     width: 100%;
     min-height: 20rem;
     max-height: 20rem;
+  
 }
-
+.swiper{
+    border-radius: 25px;
+}
 
   
 .swiper-slide img {
     width: 100%;
     min-height: 20rem;
     max-height: 20rem;
-    padding: 30px;
+    border-radius: 5px;
     align-self: center;
     display: block;
 }
