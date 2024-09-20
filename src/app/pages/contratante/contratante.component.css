@@ -28,6 +28,7 @@ section .valores li{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 .noivos h3{
     align-self: center;
@@ -48,6 +49,7 @@ section .valores li{
     display:flex;
     flex-wrap: wrap;
     padding-left: 10px;
+    justify-content: space-evenly;
 }
 .nomes li{
     padding: 15px;

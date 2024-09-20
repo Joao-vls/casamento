@@ -7,6 +7,7 @@ import { Locais } from '../../models/locais';
 import { Router } from '@angular/router';
 import { CasamentoService } from '../../services/casamento.service';
 import { CasamentoDetalhes } from '../../models/casamento-detalhes';
+import { AcessoService } from '../../services/acesso.service';
 
 @Component({
   selector: 'app-form-cadastro-casamento',
@@ -22,10 +23,10 @@ export class FormCadastroCasamentoComponent implements OnInit {
   maxData: string; // Data máxima para seleção no calendário
   localizacao!: Locais[]; // Array de locais
   cidadeSelecionada!: string; // Cidade selecionada
-  cidadesRepet:string[]=[]; // Array de cidades repetidas
+  cidadesRepet: string[] = []; // Array de cidades repetidas
   locais!: Locais[]; // Array de locais
-  diasDisponiveis!:JSON;
-  @Input()  valorTotal!:number; // Valor total do casamento recebido como entrada
+  diasDisponiveis!: JSON;
+  @Input() valorTotal!: number; // Valor total do casamento recebido como entrada
   @Output() newItemEvent = new EventEmitter<string>(); // Evento para adicionar novo item
   @Output() newServico = new EventEmitter<boolean>(); // Evento para ativar serviços
   @Output() newCadastro = new EventEmitter<boolean>(); // Evento para ativar cadastro
@@ -50,7 +51,7 @@ export class FormCadastroCasamentoComponent implements OnInit {
     return this.casamento.get('cidade') as FormControl;
   }
 
-  constructor(private formService: CadastroService, private locaisg: LocaisService,private router: Router,private casamentoService:CasamentoService) {
+  constructor(private formService: CadastroService, private acesso: AcessoService, private locaisg: LocaisService, private router: Router, private casamentoService: CasamentoService) {
     // Inicializa a data mínima e máxima para seleção no calendário
     const currentDat = new Date();
     currentDat.setDate(currentDat.getDate() + 7);
@@ -89,13 +90,21 @@ export class FormCadastroCasamentoComponent implements OnInit {
   // Seleciona a opção de cidade
   selectOpitionCidade() {
     this.localizacao = this.locais.filter(loc => {
+
       return loc.municipio == this.cidade.value;
     });
+    console.log(this.localizacao);
+
   }
 
   // Seleciona a opção de local e ajusta o limite de convidados
   selectOpitionLocal() {
-    this.NewLimit(this.local.value);
+    const localId = this.local.value; // Obtém o ID do local selecionado
+    const localSelecionado = this.locais.find(loc => { console.log(loc.id); return loc.id == localId }); // Busca o local selecionado   
+    if (localSelecionado) {
+      console.log('Local selecionado:', localSelecionado);
+      this.NewLimit(localSelecionado.quantidadeMaxPessoas); // Atualiza o limite de convidados
+    }
   }
 
   // Adiciona um novo input dinâmico
@@ -126,31 +135,78 @@ export class FormCadastroCasamentoComponent implements OnInit {
     }
     return new FormControl();
   }
-
+  getUsuarioId(): Promise<number | undefined> {
+    return new Promise((resolve, reject) => {
+      this.acesso.getId().subscribe({
+        next: (v) => {
+          if (v.id !== undefined) {
+            resolve(v.id);
+          } else {
+            reject('ID não encontrado');
+          }
+        },
+        error: (err) => {
+          reject(err);
+        }
+      });
+    });
+  }
   // Manipula o envio do formulário
   onSubmit() {
     //  this.casamentoService.getDias(this.casamento.value.data).subscribe((response: JSON) => {
     //   this.diasDisponiveis = response;
     //   console.log(this.diasDisponiveis);
-    // });
-
+    // })
     if (this.casamento.valid) {
-      
-      const informacoes:CasamentoDetalhes={
-        noivos:this.casamento.value.noivos,
-        padrinhos: this.casamento.value.padrinhos,
-        data: this.casamento.value.data, 
-        local: this.casamento.value.local,
-        cidade: this.casamento.value.cidade,
-        quantidadeConvidados: this.casamento.value.quantidadeConvidados
-      };
-      console.log('Formulário válido, enviar dados...', informacoes);
-     // this.redirectCadastro();
+      const locs: Locais | undefined = this.locais.find(loc => {
+        return loc.id == this.local.value;
+      });
+      if (!locs) {
+        console.error('Local não encontrado');
+        return;
+      }
+      this.getUsuarioId().then(id => {
+        console.log(this.casamento.value.padrinhos);
+        if (id !== undefined) {
+          
+          var nomesArray = this.casamento.value.padrinhos.map((padrinho: { nome: String; }) => padrinho.nome);
+          const nomesStringp = nomesArray;
+          nomesArray = this.casamento.value.noivos.map((noivos: { nome: String; }) => noivos.nome);
+          const nomesStringn = nomesArray;
+          
+          console.log(nomesStringn);
+          
+          const informacoes: CasamentoDetalhes = {
+            noivos: nomesStringn, // Certifique-se de que isso é um array de strings
+            padrinhos: nomesStringp, // Certifique-se de que isso é um array de strings
+            dia: this.casamento.value.data, // Data no formato correto
+            local: locs.id,
+            usuario: id,
+            quantidadeConvidados: this.casamento.value.quantidadeConvidados,
+            valorDoLocalDiaCompra: locs.valor
+          };
 
-      //this.activeCadastro();
+          console.log(informacoes);
+
+          // Agora, você pode usar 'informacoes' para fazer a requisição
+          this.casamentoService.postPlanejamento(informacoes).subscribe({
+            next: (v) => {
+              console.log('Planejamento enviado com sucesso');
+            },
+            error: (err) => {
+              console.error('Erro ao enviar o planejamento', err);
+            }
+          });
+        } else {
+          console.error('Usuário não encontrado');
+        }
+      }).catch(error => {
+        console.error('Erro ao obter ID do usuário:', error);
+      });
     } else {
       console.log('Formulário inválido, corrija os erros.');
     }
+
   }
 
   // Adiciona um novo item
@@ -159,32 +215,32 @@ export class FormCadastroCasamentoComponent implements OnInit {
   }
 
   // Ativa serviços
-  activeServicos(){
+  activeServicos() {
     this.newServico.emit(true);
   }
-  activeCadastro(){
+  activeCadastro() {
     this.newCadastro.emit(true);
   }
 
   // Verifica se o município já existe
   municipioExiste() {
     for (let index = 0; index < this.locais.length; index++) {
-      let bo:boolean=true;
+      let bo: boolean = true;
       for (let i = this.cidadesRepet.length; i >= 0; i--) {
-        if(this.cidadesRepet[i]==this.locais[index].municipio){
-          bo=false;
+        if (this.cidadesRepet[i] == this.locais[index].municipio) {
+          bo = false;
         }
       }
-        if(bo){
-          this.cidadesRepet.push(this.locais[index].municipio);
-        }
-      } 
+      if (bo) {
+        this.cidadesRepet.push(this.locais[index].municipio);
+      }
     }
+  }
 
   // Bloqueia a digitação de caracteres inválidos
-  blockExponent(e:KeyboardEvent){
+  blockExponent(e: KeyboardEvent) {
     const charCode = e.key.charCodeAt(0);
-    if (e.key === 'e' || e.key === 'E' || e.key==='+'|| e.key==='-'|| e.key==='¨') {
+    if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-' || e.key === '¨') {
       e.preventDefault();
     }
   }

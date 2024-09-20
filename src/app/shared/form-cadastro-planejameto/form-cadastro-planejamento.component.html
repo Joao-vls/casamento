@@ -87,12 +87,10 @@
       @if (localizacao) {
       <div class="inputs">
 
-        <select [formControl]="local" (change)="selectOpitionLocal()"
-          style="padding-right: 60px; text-overflow: ellipsis;">
-          <option *ngFor="let local of localizacao" [id]="local.id" [value]="local.quantidadeMaxPessoas">{{ local.rua}}
-            {{
-            local.bairro}}
-            {{ local.numero}} Quantidade de pessoas : {{local.quantidadeMaxPessoas}}</option>
+        <select [formControl]="local" (change)="selectOpitionLocal()">
+          <option *ngFor="let local of localizacao" [value]="local.id">
+            {{ local.rua }}, {{ local.bairro }}, {{ local.numero }} - Máx: {{ local.quantidadeMaxPessoas }} pessoas
+          </option>
         </select>
 
       </div>

@@ -40,12 +40,11 @@ export class CadastroComponent {
     const novoUsuario = {
       nome: this.form.value.nome,
       email: this.form.value.email,
-      senha: this.form.value.password
+      senha:this.form.value.password,
     };
 
     this.acesso.createUser(novoUsuario).subscribe({
       next: (v) => {
-        // Supondo que 'v' seja o token retornado pelo backend
         this.cookie.setCookie(
           'authTokenKey',  // Nome do cookie
           v.token,      // Token a ser armazenado
@@ -56,6 +55,16 @@ export class CadastroComponent {
           ''            // Domain
         );
         console.log(v);
+        
+        this.cookie.setCookie(
+          'usuario',  
+          novoUsuario,      
+          2,           
+          '/',         
+          true,        
+          'Lax',        
+          ''    
+        )
         // Redireciona para a página 'contratante' após o login bem-sucedido
         this.router.navigate(['/contratante']);
       },

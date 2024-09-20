@@ -1,28 +1,31 @@
 <app-header></app-header>
+@if (casamento) {
 <main>
 <app-sidebar></app-sidebar>
 
 <section>
     <ul class="valores">
         <li>valor total de serviços:00000</li>
-        <li>valor do local escolhido:00000</li>
-        <li>data escolhida:00/00/00</li>
+        <li>valor do local escolhido:{{casamento[0].valorDoLocalDiaCompra}}</li>
+        <li>data escolhida:{{casamento[0].dia}}</li>
     </ul>
     <div class="noivos">
         <h3>NOIVOS</h3>
         <ul class="nomes">
-           
+           @for (item of casamento[0].noivos; track $index) {
+                <li>{{item}}</li>
+           }
         </ul>
 
     </div>
     <div class="fotos">
         <app-carrosel></app-carrosel>
     </div>
-    @if (casamento) {
+   
         <div class="noivos">
             <h3>DADOS DO CASAMENTO</h3>
             <ul class="nomes">
-               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+               <li>quantidade de Convidados : {{casamento[0].quantidadeConvidados}}  <button></button></li>
                <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
                <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
                <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
@@ -32,9 +35,12 @@
             </ul>
     
         </div>
-    }@else {
+ 
         <button class="confirmar"></button>
-    }
+    
 </section>
 <app-footer></app-footer>
 </main>
+}@else {
+    <app-planejamento></app-planejamento>
+}

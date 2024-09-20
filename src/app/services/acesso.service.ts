@@ -15,4 +15,7 @@ export class AcessoService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<Usuario>(this.apiUrl, user, { headers });
   }
+  getId():Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.apiUrl}/me`);
+  }
 }
