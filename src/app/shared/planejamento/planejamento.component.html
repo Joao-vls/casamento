@@ -1,5 +1,3 @@
-<app-header></app-header>
-
 <div>
 <app-form-cadastro-casamento (newItemEvent)="addItem($event)" (newServico)="menuServico()" [valorTotal]="valorTo" (newCadastro)="menuCadastro()"></app-form-cadastro-casamento>
 <app-calculo  [ngClass]="{'preco_servico':selecionarServico}" [name]="name" (valorTotal)="addValor($event)"></app-calculo>

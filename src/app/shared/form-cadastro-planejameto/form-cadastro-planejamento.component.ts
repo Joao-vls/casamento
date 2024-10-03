@@ -191,7 +191,10 @@ export class FormCadastroCasamentoComponent implements OnInit {
           // Agora, você pode usar 'informacoes' para fazer a requisição
           this.casamentoService.postPlanejamento(informacoes).subscribe({
             next: (v) => {
-              console.log('Planejamento enviado com sucesso');
+              const currentUrl = this.router.url;
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([currentUrl]);
+              });
             },
             error: (err) => {
               console.error('Erro ao enviar o planejamento', err);

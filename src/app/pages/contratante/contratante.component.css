@@ -79,3 +79,13 @@ section .valores li{
     padding-left: 2px;
     
 }
+.infos{
+   width: 40%;
+   display: flex;
+   justify-content: space-evenly;
+}
+.infos p{
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+}

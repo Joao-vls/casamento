@@ -4,11 +4,6 @@
 <app-sidebar></app-sidebar>
 
 <section>
-    <ul class="valores">
-        <li>valor total de serviços:00000</li>
-        <li>valor do local escolhido:{{casamento[0].valorDoLocalDiaCompra}}</li>
-        <li>data escolhida:{{casamento[0].dia}}</li>
-    </ul>
     <div class="noivos">
         <h3>NOIVOS</h3>
         <ul class="nomes">
@@ -18,29 +13,37 @@
         </ul>
 
     </div>
+    @if (casamento[0].padrinhos?.length) {
+    <div class="noivos">
+        <h3>PADRINHOS</h3>
+        <ul class="nomes">
+           @for (item of casamento[0].padrinhos; track $index) {
+                <li>{{item}}</li>
+           }
+        </ul>
+    </div>
+    }
     <div class="fotos">
         <app-carrosel></app-carrosel>
     </div>
-   
+ 
         <div class="noivos">
             <h3>DADOS DO CASAMENTO</h3>
             <ul class="nomes">
-               <li>quantidade de Convidados : {{casamento[0].quantidadeConvidados}}  <button></button></li>
-               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
-               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
-               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
-               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
-               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
-               <li>listddfddddddddddddddddddddddd<button>ggg</button></li>
+                <li class="infos"><p>quantidade de Convidados : {{casamento[0].quantidadeConvidados}} </p> <button class="editar"></button></li>
+                <li class="infos"><p>Local : {{local.municipio}}  {{local.bairro}} {{local.rua}}</p> <button class="editar"></button></li>
+                <li class="infos"><p>data escolhida: {{casamento[0].dia}}</p><button class="editar"></button></li>
+                <li class="infos"><p>valor total de serviços:00000</p>  <button class="editar"></button></li>
+
             </ul>
     
         </div>
  
-        <button class="confirmar"></button>
-    
+        <button class="confirmar" (click)="popUp=true">confirmar pagamento</button>
 </section>
 <app-footer></app-footer>
 </main>
 }@else {
     <app-planejamento></app-planejamento>
 }
+<app-pop-up [ope]="popUp" (fechar)="confirmar($event)"></app-pop-up>
