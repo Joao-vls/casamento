@@ -89,3 +89,6 @@ section .valores li{
     overflow: hidden;
     text-overflow: ellipsis;  
 }
+.infos input{
+    width: 40px;
+}

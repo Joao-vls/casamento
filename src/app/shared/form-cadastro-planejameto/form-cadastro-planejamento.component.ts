@@ -153,10 +153,6 @@ export class FormCadastroCasamentoComponent implements OnInit {
   }
   // Manipula o envio do formulário
   onSubmit() {
-    //  this.casamentoService.getDias(this.casamento.value.data).subscribe((response: JSON) => {
-    //   this.diasDisponiveis = response;
-    //   console.log(this.diasDisponiveis);
-    // })
     if (this.casamento.valid) {
       const locs: Locais | undefined = this.locais.find(loc => {
         return loc.id == this.local.value;
@@ -188,7 +184,6 @@ export class FormCadastroCasamentoComponent implements OnInit {
 
           console.log(informacoes);
 
-          // Agora, você pode usar 'informacoes' para fazer a requisição
           this.casamentoService.postPlanejamento(informacoes).subscribe({
             next: (v) => {
               const currentUrl = this.router.url;

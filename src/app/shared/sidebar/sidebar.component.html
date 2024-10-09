@@ -1,8 +1,20 @@
 <section>
+    @if (contratante) {
     <ul>
         <li>44</li>
         <li>44</li>
         <li>44</li>
         <li>44</li>
     </ul>
+}@else {
+    <div class="semcontrato">
+    <img src="../../../assets/img/cadeado.png" alt="">
+    <p>Confirme o pagamento para liberar outras opçoes</p>
+<button class="confirmar" (click)="popUp=true">confirmar pagamento</button>
+
+</div>
+@if(popUp){
+<app-pop-up [ope]="popUp" [id]="id" (fechar)="confirmar($event)"></app-pop-up>
+}
+}
 </section>

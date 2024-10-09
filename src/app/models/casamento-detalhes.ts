@@ -1,6 +1,7 @@
 import { Locais } from "./locais";
 
 export interface CasamentoDetalhes {
+  id?:number;
   dia: Date;
   local: number | Locais; // ID do local
   noivos: string[];

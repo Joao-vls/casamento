@@ -3,5 +3,35 @@ section{
     width: 28%;
     position: absolute;
     height: 100%;
-    
+    display: flex;
+}
+.semcontrato{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70%;
+}
+.semcontrato img{
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+p{
+    color: #ffff; 
+    font-size: larger;
+    text-align: center;
+}
+.confirmar{
+    align-self: center;
+    width: 15.9rem;
+    color: #ff3131;
+    background-color: #ffffff ;
+    height: 3rem;
+    padding: 10px;
+    border-radius: 1.4rem;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffffff7e;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 8px;
+    margin-top: 30px;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import * as CryptoJS from 'crypto-js';
+import CryptoJS from 'crypto-js';
 
 
 @Injectable({

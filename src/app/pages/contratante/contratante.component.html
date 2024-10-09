@@ -1,7 +1,7 @@
 <app-header></app-header>
-@if (casamento) {
+@if (existe) {
 <main>
-<app-sidebar></app-sidebar>
+<app-sidebar [contratante]="!contrato" [id]="id" ></app-sidebar>
 
 <section>
     <div class="noivos">
@@ -30,20 +30,45 @@
         <div class="noivos">
             <h3>DADOS DO CASAMENTO</h3>
             <ul class="nomes">
-                <li class="infos"><p>quantidade de Convidados : {{casamento[0].quantidadeConvidados}} </p> <button class="editar"></button></li>
-                <li class="infos"><p>Local : {{local.municipio}}  {{local.bairro}} {{local.rua}}</p> <button class="editar"></button></li>
-                <li class="infos"><p>data escolhida: {{casamento[0].dia}}</p><button class="editar"></button></li>
-                <li class="infos"><p>valor total de serviços:00000</p>  <button class="editar"></button></li>
+                <li class="infos"><p>quantidade de Convidados : 
+                    @if (editar[0]) {
+                    <input type="number" id="quantidadeConvidados" [(ngModel)]="novaQuantidadeConvidados">
+                    }@else {
+                    {{casamento[0].quantidadeConvidados}}
+                    }
+                </p> <button class="editar" *ngIf="contrato" (click)="editConvidados(novaQuantidadeConvidados)"></button></li>
+                <li class="infos">
+                    <p> Local : 
+                    @if (editar[1]) {
+                      <select style="width: 50px;" [(ngModel)]="local">
+                        <option *ngFor="let local of locais" [ngValue]="local">
+                          {{local.municipio}} {{ local.rua }}, {{ local.bairro }}, {{ local.numero }} - Máx: {{ local.quantidadeMaxPessoas }} pessoas
+                        </option>
+                      </select>
+                    }@else {
+                     {{ local.municipio }} {{ local.bairro }} {{ local.rua }}
+                    }
+                </p>
+                    <button class="editar" *ngIf="contrato" (click)="editLocal()"></button>
+                  </li>
+                <li class="infos"><p>data escolhida:
+                    @if (editar[2]) {
+                    <input style="width: 100px;" type="date" id="data" [max]="dtMax" [min]="dtMin" [(ngModel)]="data">
+                    }@else {
+                       {{casamento[0].dia | date:'dd/MM/yyyy' }} 
+                    }
+                     </p><button *ngIf="contrato" class="editar" (click)="editData()"></button></li>
+                <li class="infos"><p>valor total de serviços:00000</p>  <button *ngIf="contrato" class="editar"></button></li>
 
             </ul>
     
         </div>
  
-        <button class="confirmar" (click)="popUp=true">confirmar pagamento</button>
+        <button class="confirmar" *ngIf="contrato" (click)="popUp=true">confirmar pagamento</button>
 </section>
 <app-footer></app-footer>
+<app-pop-up [ope]="popUp" [id]="id" (fechar)="confirmar($event)"></app-pop-up>
 </main>
 }@else {
     <app-planejamento></app-planejamento>
 }
-<app-pop-up [ope]="popUp" (fechar)="confirmar($event)"></app-pop-up>
