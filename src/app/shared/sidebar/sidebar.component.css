@@ -16,10 +16,30 @@ section{
     height: 120px;
     margin-bottom: 20px;
 }
-p{
+p,li{
     color: #ffff; 
     font-size: larger;
     text-align: center;
+}
+ul{
+    list-style: none;
+    padding-left: 5px;
+    padding-top: 15px;
+    width: 100%;
+}
+li{
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+li:hover{
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffffff7e;
+}
+li img{
+    width: 25px;
+    height: 25px;
 }
 .confirmar{
     align-self: center;
