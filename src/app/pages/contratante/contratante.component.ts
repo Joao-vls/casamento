@@ -15,10 +15,12 @@ import { PopUpConfirmarComponent } from "../../shared/pop-up-confirmar/pop-up-co
 import { FormsModule } from '@angular/forms';
 import { CadastroService } from '../../services/planejamento.service';
 import { ResponseGenerica } from '../../models/response';
+import { ServicosComponent } from "../../shared/servicos/servicos.component";
+import { Servicos } from '../../models/servicos';
 @Component({
   selector: 'app-contratante',
   standalone: true,
-  imports: [HeaderComponent, SidebarComponent, CarroselComponent, FooterComponent,FormsModule, PlanejamentoComponent, PopUpConfirmarComponent,CommonModule],
+  imports: [HeaderComponent, SidebarComponent, CarroselComponent, FooterComponent, FormsModule, PlanejamentoComponent, PopUpConfirmarComponent, CommonModule, ServicosComponent],
   templateUrl: './contratante.component.html',
   styleUrl: './contratante.component.css'
 })
@@ -28,6 +30,7 @@ export class ContratanteComponent {
   existe:boolean=false;
   data!:Date;
   novaQuantidadeConvidados: number = 0; 
+  vServicos:number=0;
   editar:boolean[]=[false];
   popUp: boolean=false;
   locais?:Locais[];
@@ -35,6 +38,8 @@ export class ContratanteComponent {
   contrato!:boolean;
   dtMax:string;
   id!:number;
+  selecionarServico!: boolean;
+  servicos!:Servicos[];
 
   constructor(private casamentoAPI:CasamentoService, cookies:CookiesService ,sLocais:LocaisService){
     var usuario:Usuario={
@@ -52,38 +57,44 @@ export class ContratanteComponent {
     this.dtMax = currentDate.toISOString().split('T')[0];
     casamentoAPI.getPlanejamento(usuario.email as string).subscribe({
       next: (response: CasamentoDetalhes[]) => {
-        // Verifique se a resposta contém dados
+       
         if (response && response.length > 0) {
           const primeiroElemento = response[0];
-          
-          // Realize a próxima chamada para obter detalhes do casamento
           casamentoAPI.getCasamento(primeiroElemento.id as number).subscribe({
             next: (response1: ResponseGenerica) => {
-              this.contrato = !response1.existe; // Defina o valor de contrato baseado na resposta
+              this.contrato = !response1.existe;
             },
             error(err) {
-              console.log(err);
+              console.error(err);
             },
           });
-    
-          // Acesse os detalhes do casamento
-          this.casamento = response; // Atribuindo o array de casamento
-          this.novaQuantidadeConvidados = primeiroElemento.quantidadeConvidados; // Acessando quantidade de convidados
-          this.id = primeiroElemento.id as number; // Acessando o ID
-          this.local = primeiroElemento.local as Locais; // Acessando o local
-          this.data = primeiroElemento.dia; // Acessando a data
-          this.existe = true; // Marcar que o casamento existe
+          this.casamento = response; 
+          
+          this.novaQuantidadeConvidados = primeiroElemento.quantidadeConvidados; 
+          this.id = primeiroElemento.id as number;
+          this.local = primeiroElemento.local as Locais;
+          this.data = primeiroElemento.dia;
+          this.existe = true; 
+          if (primeiroElemento.servicos) {
+            this.vServicos= primeiroElemento.servicos.reduce((acc, servico) => acc + servico.valor, 0) 
+            this.servicos=primeiroElemento.servicos.map(ti => ti.tipoServico)
+            
+          }
         } else {
           console.warn('Resposta vazia ou inválida:', response);
         }
       },
       error(err) {
-        console.error('Erro ao obter planejamento:', err);
+        console.error(err);
       },
     });
     
   
   }
+  closeMenu(){
+    this.selecionarServico=false;
+    document.body.style.overflow = 'auto';
+}
   confirmar(eve:boolean){
     return true;
   }
@@ -91,7 +102,6 @@ export class ContratanteComponent {
     if(this.editar[1] && this.casamento[0].id){
       this.casamentoAPI.patchLocal(this.casamento[0].id,this.local.id).subscribe({
         next: (response) => {
-          console.log('Quantidade de convidados alterada com sucesso!', response);
           this.casamento[0]=response;
           this.editar[1]=false
         },
@@ -107,7 +117,6 @@ export class ContratanteComponent {
     if(this.editar[0] && this.casamento[0].id){
       this.casamentoAPI.patchQuantidadeConvidados(this.casamento[0].id,quantidade ).subscribe({
         next: (response) => {
-          console.log('Quantidade de convidados alterada com sucesso!', response);
           this.casamento[0]=response;
           this.editar[0]=false
         },
@@ -123,7 +132,6 @@ export class ContratanteComponent {
     if(this.editar[2] && this.casamento[0].id){
       this.casamentoAPI.patchData(this.casamento[0].id,this.data).subscribe({
         next: (response) => {
-          console.log('Quantidade de convidados alterada com sucesso!', response);
           this.casamento[0]=response;
           this.editar[2]=false
         },

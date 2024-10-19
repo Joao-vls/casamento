@@ -24,7 +24,7 @@
     </div>
     }
     <div class="fotos">
-        <app-carrosel></app-carrosel>
+        <app-carrosel [id]="local.id"></app-carrosel>
     </div>
  
         <div class="noivos">
@@ -58,7 +58,9 @@
                        {{casamento[0].dia | date:'dd/MM/yyyy' }} 
                     }
                      </p><button *ngIf="contrato" class="editar" (click)="editData()"></button></li>
-                <li class="infos"><p>valor total de serviços:00000</p>  <button *ngIf="contrato" class="editar"></button></li>
+                <li class="infos"><p>valor total de serviços:{{vServicos}}</p>  <button *ngIf="contrato" class="editar" (click)="selecionarServico=true"></button></li>
+                <li class="infos"><p>valor Do local:{{local.valor}}</p></li>
+                <li class="infos"><p>valor total:{{local.valor+vServicos}}</p></li>
 
             </ul>
     
@@ -66,9 +68,14 @@
  
         <button class="confirmar" *ngIf="contrato" (click)="popUp=true">confirmar pagamento</button>
 </section>
-<app-footer></app-footer>
+
 <app-pop-up [ope]="popUp" [id]="id" (fechar)="confirmar($event)"></app-pop-up>
+<app-footer></app-footer>
+
 </main>
 }@else {
     <app-planejamento></app-planejamento>
+}
+@if (selecionarServico) {
+    <app-servicos [id]="id" [tel]="selecionarServico"  [servicosSele]="servicos" (close)="closeMenu()"></app-servicos>
 }

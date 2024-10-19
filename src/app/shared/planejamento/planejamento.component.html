@@ -1,10 +1,10 @@
 <div>
 <app-form-cadastro-casamento (newItemEvent)="addItem($event)" (newServico)="menuServico()" [valorTotal]="valorTo" (newCadastro)="menuCadastro()"></app-form-cadastro-casamento>
-<app-calculo  [ngClass]="{'preco_servico':selecionarServico}" [name]="name" (valorTotal)="addValor($event)"></app-calculo>
+<!-- <app-calculo  [ngClass]="{'preco_servico':selecionarServico}" [name]="name" (valorTotal)="addValor($event)"></app-calculo> -->
 </div>
-@if (selecionarServico) {
+<!-- @if (selecionarServico) {
 <app-servicos (close)="closeMenu()" (servicosOut)="calcular($event)"></app-servicos>
-}
-@if (cadastro) {
+} -->
+<!-- @if (cadastro) {
 <app-cadastro (close)="closeCadastro()"></app-cadastro>
-}
+} -->

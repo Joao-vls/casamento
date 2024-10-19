@@ -1,14 +1,20 @@
 import { Locais } from "./locais";
+import { Servicos } from "./servicos";
 
 export interface CasamentoDetalhes {
   id?:number;
   dia: Date;
-  local: number | Locais; // ID do local
+  local: number | Locais;
   noivos: string[];
   padrinhos?: string[];
-  usuario: number; // ID do usuário
+  usuario: number;
   quantidadeConvidados: number;
+  servicos?:TipoServico[]
   valorDoLocalDiaCompra: number;
 }
-
+export interface TipoServico{
+id:number;
+tipoServico:Servicos
+valor:number;
+}
  

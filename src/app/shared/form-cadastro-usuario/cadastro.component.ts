@@ -53,9 +53,7 @@ export class CadastroComponent {
           true,         // Secure
           'Lax',        // SameSite
           ''            // Domain
-        );
-        console.log(v);
-        
+        );        
         this.cookie.setCookie(
           'usuario',  
           novoUsuario,      

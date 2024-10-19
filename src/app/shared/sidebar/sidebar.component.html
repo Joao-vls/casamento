@@ -1,20 +1,21 @@
 <section>
     @if (contratante) {
     <ul>
-        <li>gerar convite <img src="../../../assets/img/convite.png" alt=""></li>
-        <li>44</li>
-        <li>44</li>
-        <li>44</li>
+        <li (click)="popUp[1]=true">gerar convite <img  src="../../../assets/img/convite.png" alt=""></li>
     </ul>
+    @if(popUp[1]){
+        <app-pop-up-convite [ope]="popUp[1]" (fechar)="confirmar($event,1)"></app-pop-up-convite>
+    }
 }@else {
     <div class="semcontrato">
     <img src="../../../assets/img/cadeado.png" alt="">
     <p>Confirme o pagamento para liberar outras opçoes</p>
-<button class="confirmar" (click)="popUp=true">confirmar pagamento</button>
+<button class="confirmar" (click)="popUp[0]=true">confirmar pagamento</button>
 
 </div>
-@if(popUp){
-<app-pop-up [ope]="popUp" [id]="id" (fechar)="confirmar($event)"></app-pop-up>
+@if(popUp[0]){
+<app-pop-up [ope]="popUp[0]" [id]="id" (fechar)="confirmar($event,0)"></app-pop-up>
 }
+
 }
 </section>

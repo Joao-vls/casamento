@@ -14,12 +14,10 @@ export class CalculoComponent {
   name!: Servicos[]
   @Output() valorTotal = new EventEmitter <number>();
   numero: number = 0;
-  private eventoSubscription: Subscription;
+  
 
   constructor(private eventService: ServicosService){
-    this.eventoSubscription = this.eventService.botaoClicado$.subscribe(() => {
-      this.somaValores();
-    });
+    
   }
 
 
@@ -33,8 +31,7 @@ export class CalculoComponent {
 
   removerValor(i:number) {
     
-    this.name.splice(i,1);
-    this.eventService.emitirBotaoClicado();
+   
   }
 
 }

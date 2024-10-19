@@ -4,6 +4,8 @@ export interface Locais {
     complemento: string
     descricao: string
     municipio: string
+    imagens:string[]
+    imageUrls:string[]
     numero: string
     quantidadeMaxPessoas: number
     rua: string

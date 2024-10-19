@@ -3,7 +3,7 @@ export interface Usuario {
     email: string;
     nome: string;
     id?:number;
-    token?: string; // Opcional, para armazenar o token JWT
+    token?: string; 
     casamentoSemContrato?: any;
   }
   

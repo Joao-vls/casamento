@@ -1,34 +1,53 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import Swiper from 'swiper';
 import { Navigation, Pagination,Scrollbar } from 'swiper/modules';
 
-// import Swiper and modules styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { CommonModule } from '@angular/common';
-// Importa os estilos de barra de rolagem
+import { LocaisService } from '../../services/locais.service';
+import { Locais } from '../../models/locais';
+
 
 @Component({
   selector: 'app-carrosel',
   standalone: true,
   imports:[CommonModule],
   templateUrl: './carrosel.component.html',
-  styleUrls: ['./carrosel.component.css'] // Corrigido de styleUrl para styleUrls
+  styleUrls: ['./carrosel.component.css'] 
 })
-export class CarroselComponent implements AfterViewInit {
+export class CarroselComponent implements AfterViewInit, OnChanges{
+  @Input() id!:number;
 
   images: string[] = [
-    'assets/img/ban.jpg',
-    'assets/img/ban2.jpg',
-    'assets/img/ban.jpg',
-    'assets/img/ban.jpg',
-    'assets/img/ban.jpg',
-    'assets/img/ban.jpg'
+   
   ];
+  constructor(private localService: LocaisService) {}
+
+  ngOnChanges(){
+    this.localService.getImagensLocal(this.id).subscribe({
+      next: (response: Locais) => {
+          this.images=response.imageUrls;            
+      },
+      error: (err) => {
+          console.error('Erro ao carregar o local:', err);
+      },
+  });
+  }
+
+  ngOnInit() {
+      this.localService.getImagensLocal(this.id).subscribe({
+          next: (response: Locais) => {
+              this.images=response.imageUrls;  
+          },
+          error: (err) => {
+              console.error('Erro ao carregar o local:', err);
+          },
+      });
+  }
 
   ngAfterViewInit() {
-    // Inicializa o Swiper após a visualização do componente
     new Swiper('.swiper', {
       modules: [Navigation, Pagination, Scrollbar],
       slidesPerView: 3,

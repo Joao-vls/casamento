@@ -1,0 +1,11 @@
+@if(ope){
+    <div class="fechart" (click)="fecharPop()"></div>
+    <section>
+      <div>
+        <h1>Nome convidado</h1>
+        <input type="text" [(ngModel)]="nomeConvidado">  
+        <button (click)="downloadPdf()">Gerar Convite</button>
+      </div>
+    </section>
+}
+  

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CasamentoService } from '../../services/casamento.service';
 import { Router } from '@angular/router';
 @Component({
@@ -9,13 +9,18 @@ import { Router } from '@angular/router';
   templateUrl: './pop-up.component.html',
   styleUrl: './pop-up.component.css'
 })
-export class PopUpConfirmarComponent {
+export class PopUpConfirmarComponent implements OnChanges {
   @Input() ope:boolean=true;
   @Input() id!:number;
   @Output() fechar=new EventEmitter<boolean>();
 
   constructor(private casamentoAPI:CasamentoService,private router: Router){
-
+    
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.ope) {
+      this.tela()  
+    }
   }
   
   buttonActive() {
@@ -31,12 +36,12 @@ export class PopUpConfirmarComponent {
       }
     })
   }
+  
   tela(){
-    document.body.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     window.scrollTo({
         top: 50,
-        behavior: 'smooth' // faz a rolagem suavemente
+        behavior: 'smooth'
       });
   }
   fecharPop(){

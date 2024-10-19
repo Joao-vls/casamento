@@ -12,12 +12,13 @@ import { CommonModule } from '@angular/common'; // Import necessário para diret
 })
 export class HeaderComponent {
 
+
   @Input() url: string = '';
   paginaAtual!: string;
 
   constructor(
     private router: Router,
-    private cookiesService: CookiesService, // Consistência no nome do serviço
+    private cookiesService: CookiesService,
     private route: ActivatedRoute
   ) { 
     this.router.events.subscribe(event => {
@@ -39,6 +40,11 @@ export class HeaderComponent {
 
   sessionCookie(): boolean {
     return !!this.cookiesService.getCookie('usuario'); // Simplificação da verificação de cookies
+  }
+  cookieDelete() {
+      this.cookiesService.deleteAll()
+      window.location.reload();
+
   }
 
   private updateCurrentPage() {

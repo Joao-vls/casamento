@@ -7,13 +7,14 @@ import { ServicosComponent } from "../servicos/servicos.component";
 import { Servicos } from '../../models/servicos';
 import { ServicosService } from '../../services/servicos.service';
 import { CadastroComponent } from "../form-cadastro-usuario/cadastro.component";
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
     selector: 'app-planejamento',
     standalone: true,
     templateUrl: './planejamento.component.html',
     styleUrl: './planejamento.component.css',
-    imports: [HeaderComponent, FormCadastroCasamentoComponent, CalculoComponent, ServicosComponent, CommonModule, CadastroComponent]
+    imports: [HeaderComponent, FormCadastroCasamentoComponent, CalculoComponent, ServicosComponent, CommonModule, CadastroComponent, FooterComponent]
 })
 export class PlanejamentoComponent {
 
@@ -35,7 +36,7 @@ export class PlanejamentoComponent {
         document.body.style.overflow = 'hidden';
         window.scrollTo({
             top: 50,
-            behavior: 'smooth' // faz a rolagem suavemente
+            behavior: 'smooth' 
           });
 
     }
@@ -45,7 +46,7 @@ export class PlanejamentoComponent {
         document.body.style.overflow = 'hidden';
         window.scrollTo({
             top: 50,
-            behavior: 'smooth' // faz a rolagem suavemente
+            behavior: 'smooth' 
           });
     }
     closeCadastro() {
@@ -58,6 +59,7 @@ export class PlanejamentoComponent {
     }
     calcular(s:Servicos){
         this.name.push(s);
+        
     }
     addValor(e:number){
         this.valorTo=e;

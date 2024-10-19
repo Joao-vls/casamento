@@ -16,7 +16,6 @@ export class CookiesService {
     this.secretKey = this.retrieveOrGenerateKey();
   }
 
-  // Gera ou recupera a chave de criptografia, considerando a expiração
   private retrieveOrGenerateKey(): string {
     const expiry = localStorage.getItem(this.keyExpiryStorageName);
     const now = new Date();
@@ -28,7 +27,6 @@ export class CookiesService {
       }
     }
 
-    // Se a chave não existe ou está expirada, gere uma nova
     const newKey = this.generateRandomKey(32);
     const expiryDate = new Date(now.getTime() + this.keyExpiryHours * 60 * 60 * 1000);
     
@@ -38,7 +36,6 @@ export class CookiesService {
     return newKey;
   }
 
-  // Gera uma chave aleatória
   private generateRandomKey(length: number): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -49,12 +46,10 @@ export class CookiesService {
     return result;
   }
 
-  // Criptografa os dados
   private encrypt(data: string): string {
     return CryptoJS.AES.encrypt(data, this.secretKey).toString();
   }
 
-  // Descriptografa os dados
   private decrypt(data: string): string | null {
     try {
       return CryptoJS.AES.decrypt(data, this.secretKey).toString(CryptoJS.enc.Utf8);
@@ -64,12 +59,10 @@ export class CookiesService {
     }
   }
 
-  // Gera um hash para o nome do cookie
   private hashCookieName(cookieName: string): string {
     return CryptoJS.SHA256(cookieName).toString();
   }
 
-  // Define um cookie criptografado com expiração de 2 horas
   setCookie(
     cookieName: string,
     data: any,
@@ -97,7 +90,6 @@ export class CookiesService {
     );
   }
 
-  // Obtém e descriptografa um cookie
   getCookie(cookieName: string): any | null {
     const hashedCookieName = this.hashCookieName(cookieName);
     const encryptedData = this.cookieService.get(hashedCookieName);
@@ -116,13 +108,14 @@ export class CookiesService {
     return null;
   }
 
-  // Deleta um cookie específico
   deleteCookie(cookieName: string, path: string = '/', domain: string = ''): void {
     const hashedCookieName = this.hashCookieName(cookieName);
     this.cookieService.delete(hashedCookieName, path, domain);
   }
+  deleteAll(){
+    this.cookieService.deleteAll()
+  }
 
-  // Verifica se o cookie existe
   hasCookie(cookieName: string): boolean {
     const hashedCookieName = this.hashCookieName(cookieName);
     return this.cookieService.check(hashedCookieName);

@@ -1,6 +1,6 @@
-<div class="div_close" (click)="closeServicos()"></div>
-<section>
-    <div class="selecao">
+<div class="div_close" (click)="closeServicos()" style="z-index: 99;"></div>
+<section >
+    <div class="selecao" >
         <div class="fixo"> <button class="close" (click)="closeServicos()">X</button>
             <h1>serviços</h1>
             <hr>
@@ -10,7 +10,9 @@
             <div class="servicos">
                 <h2>{{item.nome}}</h2>
                 <div class="buttons">
-                    <button (click)="addServico(item)">adicionar</button>
+
+                    <button *ngIf="!adicionados[$index]" (click)="addServico(item,$index)">adicionar</button>
+                    <button *ngIf="adicionados[$index]" (click)="removerServico(item.id,$index)" style="background-color: #580000;">Remover</button>
                     <button (click)="ativar($index)" style="background-color: #FF4646;">
                         @if (!ativo[$index]) { mais informação}@else {
                         menos informação
@@ -26,6 +28,10 @@
             }
             }
 
+        </div>
+        <div class="selecionado">
+            <div class="valor"><p>Valor :</p>{{valor}}R$<p></p></div>
+            <button (click)="patchServicos()">confirmar</button>
         </div>
 
     </div>

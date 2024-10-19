@@ -15,6 +15,7 @@ export class CasamentoService {
   private baseUrl: string = 'http://localhost:8080/casamento/diasmarcados/';
   private planejamentoURL: string = 'http://localhost:8080/casamentos';
   private casamentoURL: string = 'http://localhost:8080/casamento';
+  private pdfURL: string = 'http://localhost:8080/generate-pdf';
 
 
   constructor(private http: HttpClient,) { }
@@ -24,23 +25,18 @@ export class CasamentoService {
   }
 
   getPlanejamento(params: string): Observable<CasamentoDetalhes[]> {
-    console.log(`${this.planejamentoURL}/contratante/${params}`);
 
     return this.http.get<CasamentoDetalhes[]>(`${this.planejamentoURL}/contratante/${params}`);
   }
   getCasamento(params: number): Observable<ResponseGenerica> {
     return this.http.get<ResponseGenerica>(`${this.casamentoURL}/verificar/${params}`);
   }
+ 
   
   postPlanejamento(casamentoSemContrato: CasamentoDetalhes): Observable<CasamentoDetalhes> {
-    // Converte o objeto para JSON string
     const jsonBody = JSON.stringify(casamentoSemContrato);
-
-    console.log(jsonBody);
-
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    // Envia a string JSON no corpo do POST
     return this.http.post<CasamentoDetalhes>(`${this.planejamentoURL}/sem-contrato`, jsonBody, { headers });
   }
   patchQuantidadeConvidados(id: number, quantidadeConvidados: number): Observable<any> {
@@ -59,5 +55,13 @@ export class CasamentoService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch(`${this.planejamentoURL}/sem-contrato/${id}/confirmar-pagamento`, {}, { headers });
   }
-
+  getCasamentoPdf(nome:string) {
+    const url = `${this.pdfURL}?content=${nome}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+  adicionarServicos(casamentoId: number, servicosIds: number[]): Observable<any> {
+    const url = `${this.planejamentoURL}/${casamentoId}/adicionar-servico`;
+    return this.http.patch(url, servicosIds);
+  }
+  
 }

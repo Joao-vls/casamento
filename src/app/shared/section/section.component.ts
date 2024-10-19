@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-section',
@@ -16,4 +17,15 @@ export class SectionComponent {
   items: string[] = [];
   @Input()
   buttonInput: string='';
+
+  constructor(
+    private router: Router,
+  ) { }
+  redirecionar(url: string | void) {
+    if (url) {
+      this.router.navigate(['/' + url]);
+    } else {
+      this.router.navigate(['/' + 'acesso']);
+    }
+  }
 }

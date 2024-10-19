@@ -12,8 +12,9 @@ export class LocaisService {
   local:string='http://localhost:8080/locais'
 
   getLocais():Observable<Locais[]>{
-    
     return this.http.get<Locais[]>(this.local);
   }
-  
+  getImagensLocal(localId: number): Observable<Locais> {
+    return this.http.get<Locais>(`${this.local}/${localId}`);
+  }
 }

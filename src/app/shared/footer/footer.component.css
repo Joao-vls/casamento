@@ -2,7 +2,7 @@ footer{
     height: 20rem;
     width: 100%;
     background-color: #ff4646;
-    position: absolute;
+    position: relative;
     bottom: 0;
 }
 .list{

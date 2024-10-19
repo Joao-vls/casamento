@@ -3,4 +3,5 @@ export interface Servicos {
     nome: string
     descricao: string
     valor: number
+    
 }
